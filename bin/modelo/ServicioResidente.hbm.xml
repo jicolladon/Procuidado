@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.ServicioResidente" table="ServicioResidente" catalog="procuidado">
+        <composite-id name="id" class="modelo.ServicioResidenteId">
+            <key-property name="identificadorResidente" type="int">
+                <column name="identificadorResidente" />
+            </key-property>
+            <key-property name="identificadorServicio" type="int">
+                <column name="identificadorServicio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="servicio" class="modelo.Servicio" update="false" insert="false" fetch="select">
+            <column name="identificadorServicio" not-null="true" unique="true" />
+        </many-to-one>
+        <one-to-one name="residente" class="modelo.Residente"></one-to-one>
+    </class>
+</hibernate-mapping>

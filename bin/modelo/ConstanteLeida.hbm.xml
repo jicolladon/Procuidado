@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.ConstanteLeida" table="ConstanteLeida" catalog="procuidado">
+        <composite-id name="id" class="modelo.ConstanteLeidaId">
+            <key-property name="identificadorConstanteActiva" type="int">
+                <column name="identificadorConstanteActiva" />
+            </key-property>
+            <key-property name="fechaHora" type="string">
+                <column name="fechaHora" length="150" />
+            </key-property>
+            <key-property name="valor" type="double">
+                <column name="valor" precision="22" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="constanteActiva" class="modelo.ConstanteActiva" update="false" insert="false" fetch="select">
+            <column name="identificadorConstanteActiva" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

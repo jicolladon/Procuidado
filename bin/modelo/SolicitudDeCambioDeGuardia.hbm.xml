@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.SolicitudDeCambioDeGuardia" table="SolicitudDeCambioDeGuardia" catalog="procuidado">
+        <id name="identificador" type="int">
+            <column name="identificador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuidador" class="modelo.Cuidador" fetch="select">
+            <column name="identificadorSolicitado" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="guardia" class="modelo.Guardia" fetch="select">
+            <column name="identificadorGuardia" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="identificadorSolicitante" type="int">
+            <column name="identificadorSolicitante" not-null="true" unique="true" />
+        </property>
+        <property name="fecha" type="string">
+            <column name="fecha" length="100" not-null="true" />
+        </property>
+        <property name="motivo" type="string">
+            <column name="motivo" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

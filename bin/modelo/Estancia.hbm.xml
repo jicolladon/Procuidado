@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Estancia" table="Estancia" catalog="procuidado">
+        <id name="identificador" type="int">
+            <column name="identificador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="casa" class="modelo.Casa" fetch="select">
+            <column name="identificadorCasa" unique="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="identificadorRfid" type="int">
+            <column name="identificadorRFID" not-null="true" />
+        </property>
+        <property name="tiempoDePermanenciaMaxima" type="int">
+            <column name="tiempoDePermanenciaMaxima" not-null="true" />
+        </property>
+        <set name="emergenciaDeResidentePorPermanenciaProlongadas" table="EmergenciaDeResidentePorPermanenciaProlongada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identificadorEstancia" not-null="true" />
+            </key>
+            <one-to-many class="modelo.EmergenciaDeResidentePorPermanenciaProlongada" />
+        </set>
+        <set name="residentes" table="Residente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estanciaActual" />
+            </key>
+            <one-to-many class="modelo.Residente" />
+        </set>
+    </class>
+</hibernate-mapping>
