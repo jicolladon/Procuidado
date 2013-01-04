@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table catalog="procuidado" name="ServicioBotonPanico">
+		<column name="identificador"></column>
+	</table>
+	<table catalog="procuidado" name="Cuidador">
+		<column name="identificador"></column>
+		<column name="esCuidadorPorDefecto"></column>
+		<column name="telefono1"></column>
+		<column name="telefono2"></column>
+	</table>
+	<table catalog="procuidado" name="Residente">
+		<column name="identificador"></column>
+		<column name="estanciaActual"></column>
+		<column name="identificadorCasa"></column>
+		<column name="identificadorServicioEmergencias"></column>
+	</table>
+	<table catalog="procuidado" name="Estancia">
+		<column name="identificador"></column>
+		<column name="identificadorCasa"></column>
+		<column name="nombre"></column>
+		<column name="identificadorRFID"></column>
+		<column name="tiempoDePermanenciaMaxima"></column>
+	</table>
+	<table catalog="procuidado" name="ServicioDeEmergencias">
+		<column name="identificador"></column>
+		<column name="nombre"></column>
+		<column name="telefono"></column>
+		<column name="informacionAdicional"></column>
+	</table>
+	<table catalog="procuidado" name="Casa">
+		<column name="identificador"></column>
+		<column name="identificadorAdministrador"></column>
+		<column name="calle"></column>
+		<column name="alias"></column>
+		<column name="codigoPostal"></column>
+		<column name="escalera"></column>
+		<column name="numero"></column>
+		<column name="informacionAdicional"></column>
+		<column name="foto"></column>
+		<column name="pais"></column>
+		<column name="piso"></column>
+		<column name="poblacion"></column>
+		<column name="provincia"></column>
+		<column name="puerta"></column>
+		<column name="activa"></column>
+	</table>
+	<table catalog="procuidado" name="ServicioCaidas">
+		<column name="identificador"></column>
+	</table>
+	<table catalog="procuidado" name="ConstanteVital">
+		<column name="identificador"></column>
+		<column name="estaActiva"></column>
+		<column name="nombre"></column>
+	</table>
+<table catalog="procuidado" name="RestriccionHoraria">
+	<column name="horaInici"></column>
+	<column name="diaSemana"></column>
+	<column name="identficadorResidente"></column>
+	<column name="horaFin"></column>
+</table>
+<table catalog="procuidado" name="ConstanteLeida">
+		<column name="identificadorConstanteActiva"></column>
+		<column name="fechaHora"></column>
+		<column name="valor"></column>
+	</table>
+<table catalog="procuidado" name="PermisoPerfil">
+	<column name="identificadorPerfil"></column>
+	<column name="identificadorPermiso"></column>
+</table>
+<table catalog="procuidado" name="PatronDeRepeticion">
+		<column name="identificador"></column>
+		<column name="cantidad"></column>
+		<column name="repeticiones"></column>
+		<column name="tipo"></column>
+	</table>
+	<table catalog="procuidado" name="Permiso">
+		<column name="identificador"></column>
+		<column name="descripcion"></column>
+	</table>
+	<table catalog="procuidado" name="Persona">
+		<column name="Identificador"></column>
+		<column name="nombre"></column>
+		<column name="documentoId"></column>
+		<column name="password"></column>
+		<column name="identificadorPermiso"></column>
+	</table>
+	<table catalog="procuidado" name="Guardia">
+		<column name="identificador"></column>
+		<column name="identificadorCuidador"></column>
+		<column name="identificadorResidente"></column>
+		<column name="fechaInicio"></column>
+		<column name="fechaFin"></column>
+		<column name="horaInicio"></column>
+		<column name="horaFin"></column>
+	</table>
+	<table catalog="procuidado" name="EmergenciaPorConstante">
+		<column name="identificadorEmergencia"></column>
+		<column name="nombre"></column>
+	</table>
+	<table catalog="procuidado" name="ServicioConstantes">
+		<column name="identificador"></column>
+	</table>
+	<table catalog="procuidado" name="ServicioPosicionamiento">
+		<column name="identificador"></column>
+		<column name="horaEstanciaFin"></column>
+		<column name="horaEstanciaInicio"></column>
+	</table>
+	<table catalog="procuidado" name="NotificacionDeEmergencia">
+		<column name="identificador"></column>
+		<column name="identificadorCuidador"></column>
+		<column name="detalleTecnico"></column>
+		<column name="estaConfirmada"></column>
+		<column name="fecha"></column>
+		<column name="gravedad"></column>
+		<column name="momento"></column>
+		<column name="tipo"></column>
+		<column name="identificadorResidente"></column>
+		<column name="estado"></column>
+	</table>
+<table catalog="procuidado" name="EmergenciaConstantes">
+	<column name="identificadorEmergencia"></column>
+	<column name="identificadorConstante"></column>
+</table>
+<table catalog="procuidado" name="ConstanteActiva">
+		<column name="identificador"></column>
+		<column name="identificadorResidente"></column>
+		<column name="identificadorConstanteVital"></column>
+		<column name="valorMaximo"></column>
+		<column name="valorMinimo"></column>
+	</table>
+	<table catalog="procuidado" name="Calendario">
+		<column name="Identificador"></column>
+		<column name="nombre"></column>
+		<column name="color"></column>
+		<column name="Descripcion"></column>
+	</table>
+	<table catalog="procuidado" name="Perfil">
+		<column name="identificador"></column>
+		<column name="nombre"></column>
+	</table>
+	<table catalog="procuidado" name="Recordatorio">
+		<column name="identificador"></column>
+		<column name="identificadorResidente"></column>
+		<column name="fechaInicio"></column>
+		<column name="fechaFin"></column>
+		<column name="lugar"></column>
+		<column name="motivo"></column>
+		<column name="identificadorCalendario"></column>
+		<column name="identificadorPatronRepeticion"></column>
+	</table>
+	<table catalog="procuidado" name="ServicioResidente">
+		<column name="identificadorResidente"></column>
+		<column name="identificadorServicio"></column>
+	</table>
+	<table catalog="procuidado"
+		name="EmergenciaDeResidentePorPermanenciaProlongada">
+		<column name="identificadorEmergergencia"></column>
+		<column name="identificadorEstancia"></column>
+	</table>
+	<table catalog="procuidado" name="Servicio">
+		<column name="identificador"></column>
+		<column name="idHardware"></column>
+	</table>
+<table catalog="procuidado" name="CuidadorResidente">
+	<column name="identificadorCuidador"></column>
+	<column name="identificadorResidente"></column>
+</table>
+<table catalog="procuidado" name="SolicitudDeCambioDeGuardia">
+		<column name="identificador"></column>
+		<column name="identificadorSolicitado"></column>
+		<column name="identificadorSolicitante"></column>
+		<column name="identificadorGuardia"></column>
+		<column name="fecha"></column>
+		<column name="motivo"></column>
+		<column name="email"></column>
+	</table>
+</hibernate-reverse-engineering>
