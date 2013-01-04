@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Servicio" table="Servicio" catalog="procuidado">
+        <id name="identificador" type="int">
+            <column name="identificador" />
+            <generator class="assigned" />
+        </id>
+        <property name="idHardware" type="string">
+            <column name="idHardware" length="100" />
+        </property>
+        <one-to-one name="servicioCaidas" class="modelo.ServicioCaidas"></one-to-one>
+        <set name="servicioResidentes" table="ServicioResidente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identificadorServicio" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="modelo.ServicioResidente" />
+        </set>
+        <one-to-one name="servicioPosicionamiento" class="modelo.ServicioPosicionamiento"></one-to-one>
+        <one-to-one name="servicioBotonPanico" class="modelo.ServicioBotonPanico"></one-to-one>
+        <one-to-one name="servicioConstantes" class="modelo.ServicioConstantes"></one-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Recordatorio" table="Recordatorio" catalog="procuidado">
+        <id name="identificador" type="int">
+            <column name="identificador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="patronDeRepeticion" class="modelo.PatronDeRepeticion" fetch="select">
+            <column name="identificadorPatronRepeticion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="residente" class="modelo.Residente" fetch="select">
+            <column name="identificadorResidente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="calendario" class="modelo.Calendario" fetch="select">
+            <column name="identificadorCalendario" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="string">
+            <column name="fechaInicio" length="100" not-null="true" />
+        </property>
+        <property name="fechaFin" type="string">
+            <column name="fechaFin" length="100" not-null="true" />
+        </property>
+        <property name="lugar" type="string">
+            <column name="lugar" length="100" />
+        </property>
+        <property name="motivo" type="string">
+            <column name="motivo" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Calendario" table="Calendario" catalog="procuidado">
+        <id name="identificador" type="int">
+            <column name="Identificador" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="10" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="50" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" />
+        </property>
+        <set name="recordatorios" table="Recordatorio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="identificadorCalendario" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Recordatorio" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.EmergenciaDeResidentePorPermanenciaProlongada" table="EmergenciaDeResidentePorPermanenciaProlongada" catalog="procuidado">
+        <id name="identificadorEmergergencia" type="int">
+            <column name="identificadorEmergergencia" />
+            <generator class="foreign">
+                <param name="property">notificacionDeEmergencia</param>
+            </generator>
+        </id>
+        <many-to-one name="estancia" class="modelo.Estancia" fetch="select">
+            <column name="identificadorEstancia" not-null="true" />
+        </many-to-one>
+        <one-to-one name="notificacionDeEmergencia" class="modelo.NotificacionDeEmergencia" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>
