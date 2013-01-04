@@ -65,8 +65,12 @@ procuidado.modulos = procuidado.modulos || {};
         
         /**
          * Muestra la seccion de cuidadores en la pantalla principal
+         * 
+         * @param {Object} Objeto de evento
          */
-        _switchCuidadores = function () {
+        _switchCuidadores = function (oEvent) {
+        	oEvent = oEvent || window.event;
+        	oEvent.preventDefault();
         	mod.principal.switchView(_oView);
         	utils.ajax("/cuidadores?idResidente=" + _nIdResidente, {
         		success : _putCuidadores,
@@ -120,6 +124,7 @@ procuidado.modulos = procuidado.modulos || {};
         _accionCuidadorActual = function (oEvent) {
         	var oTarget, oParent, idCuidador, sClassLink;
         	oEvent = oEvent || window.event;
+        	oEvent.preventDefault();
         	oTarget = oEvent.target || oEvent.srcElement;
         	oParent = oTarget;
         	//Buscamos el padre <li>
@@ -153,8 +158,11 @@ procuidado.modulos = procuidado.modulos || {};
         	_oTituloDatosCuidador.innerText = "Editar cuidador";
         	_oFormCuidador.reset();
         	utils.dom.addClass(doc.getElementById("datosLoginCuidador"), "off");
-        	_oFormCuidador.nombreCuidador = oCuidador.nombre;
-        	_oFormCuidador.apellidosCuidador = oCuidador.apellidos;
+        	_oFormCuidador.nombreCuidador.value = oCuidador.nombre;
+        	_oFormCuidador.apellidosCuidador.value = oCuidador.apellidos;
+        	_oFormCuidador.tipoDocumentoCuidador.value = oCuidador.tipoDocumento;
+        	_oFormCuidador.numeroDocumentoCuidador.value = oCuidador.numeroDocumento;
+        	_oFormCuidador.numeroTelefonoCuidador.value = oCuidador.numeroTelefono;
         	_oFotoCuidador.src = oCuidador.pathImg;
         	utils.dom.removeClass(_oFotoCuidador, "off");
         };

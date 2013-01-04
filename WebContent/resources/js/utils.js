@@ -39,7 +39,7 @@ procuidado.utils = procuidado.utils || {};
 		 * Devuelve la expresion regular para encontrar una clase css
 		 */
 		_getRegExpHasClass = function (sClassName) {
-			return new RegExp('^' + sClassName + '\s|\s' + sClassName + '$|\s' + sClassName + '\s|^' + sClassName + '$');
+			return new RegExp("^" + sClassName + "\\s|\\s" + sClassName + "$|\\s" + sClassName + "\\s|^" + sClassName + "$");
 		};
 		/**
 		 * Comprueva si el elemento tiene una clase css

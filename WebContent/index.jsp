@@ -67,10 +67,10 @@
                 <header>
                     <!--<h1>Cuidadores</h1>-->
                 </header>
-                <section id="cuidadoresActuales">
+                <section id="cuidadoresActuales" class="subseccion">
                     
                 </section>
-                <section id="datosCuidador" class="off">
+                <section id="datosCuidador" class="subseccion off">
                     <header>
                         <h1 id="tituloDatosCuidador">Nuevo Cuidador</h1>
                     </header>
@@ -79,8 +79,8 @@
                         <label for="nombreUsuario">Nombre de usuario (*):</label>
                         <input type="text" name="nombreUsuario" id="nombreUsuario" class="fillinput" />
                         <label for="contraUsuario">Contraseña (*):</label>
-                        </div>
                         <input type="password" name="contraUsuario" id="contraUsuario" class="fillinput" />
+                        </div>
                         <label for="nombreCuidador">Nombre(*):</label>
                         <input type="text" name="nombreCuidador" id="nombreCuidador" class="fillinput" />
                         <label for="apellidosCuidador">Apellidos (*):</label>
@@ -156,7 +156,7 @@
                             <option value="22:00">22:00</option>
                             <option value="23:00">23:00</option>
                         </select>
-                        <button type="button" name="nuevaRestriccionCuidador" id="nuevaRestriccionCuidador">AÃ±adir</button>
+                        <button type="button" name="nuevaRestriccionCuidador" id="nuevaRestriccionCuidador">Añadir</button>
                         <textarea name="restriccionesCuidador" id="restriccionesCuidador" readonly rows="5" class="fillinput"></textarea>
                         <label for="fotoCuidador">Foto: </label>
                         <img src="" id="fotoCuidador" width="100" height="100" />
@@ -174,6 +174,20 @@
             <article id="casas" class="seccion off">
             </article>
         </div>
+        <aside id="residentesItems">
+        	<ul>
+        		<li>
+        			<a href="#">
+        				<img alt="Jose Maria Perez Burrull" title="Jose Maria Perez Burrull" src="resources/imagenes/residentes/000001.jpg" />
+        			</a>
+        		</li>
+        		<li>
+        			<a href="#">
+        				<img alt="Maria Parabanicos" title="Maria Parabanicos" src="resources/imagenes/residentes/000001.jpg" />
+        			</a>
+        		</li>
+        	</ul>
+        </aside>
   </div>
 </body>
 </html>
