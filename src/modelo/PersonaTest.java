@@ -21,7 +21,7 @@ public class PersonaTest {
                      "Nombre: " + p.getNombre() + " DNI: " + p.getDocumentoId()
              );
          }
-		HibernateUtil.getSessionFactory().close();
+		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
 	
 	private void createStore(){
@@ -29,7 +29,6 @@ public class PersonaTest {
 		session.beginTransaction();
 		Persona p = new Persona();
 		p.setDocumentoId("1234");
-		p.setIdentificador(1);
 		p.setNombre("Test Testington Jr.");
 		p.setPassword("myPass");
 		session.save(p);

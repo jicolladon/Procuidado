@@ -11,7 +11,6 @@ import java.util.Set;
 public class Cuidador implements java.io.Serializable {
 
 	private int identificador;
-	private NotificacionDeEmergencia notificacionDeEmergencia;
 	private boolean esCuidadorPorDefecto;
 	private String telefono1;
 	private String telefono2;
@@ -25,19 +24,17 @@ public class Cuidador implements java.io.Serializable {
 	public Cuidador() {
 	}
 
-	public Cuidador(NotificacionDeEmergencia notificacionDeEmergencia,
+	public Cuidador( 
 			boolean esCuidadorPorDefecto, String telefono1) {
-		this.notificacionDeEmergencia = notificacionDeEmergencia;
 		this.esCuidadorPorDefecto = esCuidadorPorDefecto;
 		this.telefono1 = telefono1;
 	}
 
-	public Cuidador(NotificacionDeEmergencia notificacionDeEmergencia,
+	public Cuidador( 
 			boolean esCuidadorPorDefecto, String telefono1, String telefono2,
 			Set notificacionDeEmergencias, Set restriccionHorarias,
 			Set residentes, Set guardias, Set casas,
 			Set solicitudDeCambioDeGuardias) {
-		this.notificacionDeEmergencia = notificacionDeEmergencia;
 		this.esCuidadorPorDefecto = esCuidadorPorDefecto;
 		this.telefono1 = telefono1;
 		this.telefono2 = telefono2;
@@ -57,15 +54,7 @@ public class Cuidador implements java.io.Serializable {
 		this.identificador = identificador;
 	}
 
-	public NotificacionDeEmergencia getNotificacionDeEmergencia() {
-		return this.notificacionDeEmergencia;
-	}
-
-	public void setNotificacionDeEmergencia(
-			NotificacionDeEmergencia notificacionDeEmergencia) {
-		this.notificacionDeEmergencia = notificacionDeEmergencia;
-	}
-
+	
 	public boolean isEsCuidadorPorDefecto() {
 		return this.esCuidadorPorDefecto;
 	}

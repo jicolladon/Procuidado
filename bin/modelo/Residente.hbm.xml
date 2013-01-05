@@ -13,15 +13,6 @@
         <many-to-one name="casa" class="modelo.Casa" fetch="select">
             <column name="identificadorCasa" />
         </many-to-one>
-        <many-to-one name="servicioDeEmergencias" class="modelo.ServicioDeEmergencias" fetch="select">
-            <column name="identificadorServicioEmergencias" not-null="true" />
-        </many-to-one>        
-        <set name="notificacionDeEmergencias" table="NotificacionDeEmergencia" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identificadorResidente" />
-            </key>
-            <one-to-many class="modelo.NotificacionDeEmergencia" />
-        </set>
         <set name="cuidadors" table="CuidadorResidente" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="identificadorResidente" not-null="true" />
@@ -29,24 +20,6 @@
             <many-to-many entity-name="modelo.Cuidador">
                 <column name="identificadorCuidador" not-null="true" />
             </many-to-many>
-        </set>
-        <set name="guardias" table="Guardia" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identificadorResidente" not-null="true" unique="true" />
-            </key>
-            <one-to-many class="modelo.Guardia" />
-        </set>
-        <set name="recordatorios" table="Recordatorio" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identificadorResidente" not-null="true" />
-            </key>
-            <one-to-many class="modelo.Recordatorio" />
-        </set>
-        <set name="constanteActivas" table="ConstanteActiva" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identificadorResidente" />
-            </key>
-            <one-to-many class="modelo.ConstanteActiva" />
         </set>
     </class>
 </hibernate-mapping>
