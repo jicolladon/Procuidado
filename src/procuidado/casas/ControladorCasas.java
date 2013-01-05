@@ -1,4 +1,4 @@
-package procuidado.Casas;
+package procuidado.casas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class ControladorCasas {
 		return instance;
 	}
 	/**
-	 * Elimina del sistema la casa con el id indicado como par‡metro
+	 * Elimina del sistema la casa con el id indicado como parï¿½metro
 	 * @param idCasa
 	 */
 	public void borrarCasa (int idCasa) {
@@ -71,7 +71,7 @@ public class ControladorCasas {
 		return new HashMap<String, Object>();
 	}
 	/**
-	 * Sustituye los datos de casa por los parametros pasados a la funci—n siempre que se indique 
+	 * Sustituye los datos de casa por los parametros pasados a la funciï¿½n siempre que se indique 
 	 * @param hashMapCuidador nuevos datos de la casa
 	 */
 	public void editarCasa(Map<String, Object> hashMapDatosCuidador) {
