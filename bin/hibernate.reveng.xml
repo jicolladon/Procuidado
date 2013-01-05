@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table catalog="procuidado" name="Cuidador">
+		<column name="identificador"></column>
+		<column name="esCuidadorPorDefecto"></column>
+		<column name="telefono1"></column>
+		<column name="telefono2"></column>
+	</table>
+	<table catalog="procuidado" name="Residente">
+		<column name="identificador"></column>
+		<column name="estanciaActual"></column>
+		<column name="identificadorCasa"></column>
+		<column name="identificadorServicioEmergencias"></column>
+	</table>
+	<table catalog="procuidado" name="Estancia">
+		<column name="identificador"></column>
+		<column name="identificadorCasa"></column>
+		<column name="nombre"></column>
+		<column name="identificadorRFID"></column>
+		<column name="tiempoDePermanenciaMaxima"></column>
+	</table>
+	<table catalog="procuidado" name="Casa">
+		<column name="identificador"></column>
+		<column name="identificadorAdministrador"></column>
+		<column name="calle"></column>
+		<column name="alias"></column>
+		<column name="codigoPostal"></column>
+		<column name="escalera"></column>
+		<column name="numero"></column>
+		<column name="informacionAdicional"></column>
+		<column name="foto"></column>
+		<column name="pais"></column>
+		<column name="piso"></column>
+		<column name="poblacion"></column>
+		<column name="provincia"></column>
+		<column name="puerta"></column>
+		<column name="activa"></column>
+	</table>
+	<table catalog="procuidado" name="Persona">
+		<column name="Identificador"></column>
+		<column name="nombre"></column>
+		<column name="documentoId"></column>
+		<column name="password"></column>
+		<column name="identificadorPermiso"></column>
+	</table>
+<table catalog="procuidado" name="CuidadorResidente">
+	<column name="identificadorCuidador"></column>
+	<column name="identificadorResidente"></column>
+</table>
+</hibernate-reverse-engineering>

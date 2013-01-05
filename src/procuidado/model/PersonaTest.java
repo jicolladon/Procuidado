@@ -29,10 +29,9 @@ public class PersonaTest {
 		session.beginTransaction();
 		Persona p = new Persona();
 		p.setDocumentoId("1234");
-		p.setNombre("Test Testington Jr.");
+		p.setNombre("Test Testington II");
 		p.setPassword("myPass");
 		session.save(p);
-		
 		session.getTransaction().commit();
 	}
 	
