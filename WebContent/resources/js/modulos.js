@@ -57,7 +57,7 @@ procuidado.modulos = procuidado.modulos || {};
             _oCuidadoresActuales, _sCondiciones = "Condiciones bla bla bla",
             _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
             _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
-            _oConfirmarDatosCuidador;
+            _oConfirmarDatosCuidador, _confirmarDatosCuidador;
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -123,7 +123,7 @@ procuidado.modulos = procuidado.modulos || {};
         	}
             sHTML += '	<li>';
             sHTML += '		<figure>';
-            sHTML += '			<img src="resources/imagenes/ui-person-add-icon.png" />';
+            sHTML += '			<a href="#" class="crearCuidador"><img src="resources/imagenes/ui-person-add-icon.png" /></a>';
             sHTML += '			<figcaption></figcaption>';
             sHTML += '		</figure>';
             sHTML += '	</li>';
@@ -160,6 +160,8 @@ procuidado.modulos = procuidado.modulos || {};
         				console.dir(oData);
         			}
         		});
+        	} else if (sClassLink.indexOf("crearCuidador") !== -1) {
+        		console.log("hay que crear un cuidador");
         	}
         };
         
@@ -186,7 +188,7 @@ procuidado.modulos = procuidado.modulos || {};
          * Salva los datos del formulario
          */
         _confirmarDatosCuidador = function () {
-        	
+        	console.dir(utils.dom.serializeForm(_oFormCuidador));
         };
         
         /**

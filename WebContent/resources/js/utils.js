@@ -100,7 +100,7 @@ procuidado.utils = procuidado.utils || {};
 		 * Serializa el formulario
 		 */
 		_serializeForm = function (oForm) {
-			
+			return $(oForm).serialize();
 		};
 		return {
 			addClass : _addClass,
