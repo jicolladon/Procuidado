@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="modelo.Persona" table="Persona" catalog="procuidado">
+    <class name="modelo.Persona" table="persona" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="Identificador" />
             <generator class="assigned" />

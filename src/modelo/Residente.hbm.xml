@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="modelo.Residente" table="Residente" catalog="procuidado">
+    <class name="modelo.Residente" table="residente" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="identificador" />
         </id>
@@ -13,12 +13,12 @@
         <many-to-one name="casa" class="modelo.Casa" fetch="select">
             <column name="identificadorCasa" />
         </many-to-one>
-        <set name="cuidadors" table="CuidadorResidente" inverse="false" lazy="true" fetch="select">
+        <set name="cuidadors" table="cuidadorresidente" inverse="false" lazy="true" fetch="select">
             <key>
-                <column name="identificadorResidente" not-null="true" />
+                <column name="identificadorresidente" not-null="true" />
             </key>
             <many-to-many entity-name="modelo.Cuidador">
-                <column name="identificadorCuidador" not-null="true" />
+                <column name="identificadorruidador" not-null="true" />
             </many-to-many>
         </set>
     </class>
