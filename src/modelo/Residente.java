@@ -13,8 +13,6 @@ public class Residente implements java.io.Serializable {
 	private int identificador;
 	private Estancia estancia;
 	private Casa casa;
-	private ServicioDeEmergencias servicioDeEmergencias;
-	private ServicioResidente servicioResidente;
 	private Set notificacionDeEmergencias = new HashSet(0);
 	private Set cuidadors = new HashSet(0);
 	private Set guardias = new HashSet(0);
@@ -24,20 +22,11 @@ public class Residente implements java.io.Serializable {
 	public Residente() {
 	}
 
-	public Residente(ServicioDeEmergencias servicioDeEmergencias,
-			ServicioResidente servicioResidente) {
-		this.servicioDeEmergencias = servicioDeEmergencias;
-		this.servicioResidente = servicioResidente;
-	}
-
 	public Residente(Estancia estancia, Casa casa,
-			ServicioDeEmergencias servicioDeEmergencias,
-			ServicioResidente servicioResidente, Set notificacionDeEmergencias,
+			
 			Set cuidadors, Set guardias, Set recordatorios, Set constanteActivas) {
 		this.estancia = estancia;
 		this.casa = casa;
-		this.servicioDeEmergencias = servicioDeEmergencias;
-		this.servicioResidente = servicioResidente;
 		this.notificacionDeEmergencias = notificacionDeEmergencias;
 		this.cuidadors = cuidadors;
 		this.guardias = guardias;
@@ -69,22 +58,11 @@ public class Residente implements java.io.Serializable {
 		this.casa = casa;
 	}
 
-	public ServicioDeEmergencias getServicioDeEmergencias() {
-		return this.servicioDeEmergencias;
-	}
 
-	public void setServicioDeEmergencias(
-			ServicioDeEmergencias servicioDeEmergencias) {
-		this.servicioDeEmergencias = servicioDeEmergencias;
-	}
 
-	public ServicioResidente getServicioResidente() {
-		return this.servicioResidente;
-	}
 
-	public void setServicioResidente(ServicioResidente servicioResidente) {
-		this.servicioResidente = servicioResidente;
-	}
+
+
 
 	public Set getNotificacionDeEmergencias() {
 		return this.notificacionDeEmergencias;

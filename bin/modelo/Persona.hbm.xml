@@ -17,8 +17,5 @@
         <property name="password" type="string">
             <column name="password" />
         </property>
-        <property name="identificadorPermiso" type="int">
-            <column name="identificadorPermiso" not-null="true" />
-        </property>
     </class>
 </hibernate-mapping>

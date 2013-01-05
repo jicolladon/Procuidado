@@ -6,9 +6,6 @@
     <class name="modelo.Residente" table="Residente" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="identificador" />
-            <generator class="foreign">
-                <param name="property">servicioResidente</param>
-            </generator>
         </id>
         <many-to-one name="estancia" class="modelo.Estancia" fetch="select">
             <column name="estanciaActual" />
@@ -18,8 +15,7 @@
         </many-to-one>
         <many-to-one name="servicioDeEmergencias" class="modelo.ServicioDeEmergencias" fetch="select">
             <column name="identificadorServicioEmergencias" not-null="true" />
-        </many-to-one>
-        <one-to-one name="servicioResidente" class="modelo.ServicioResidente" constrained="true"></one-to-one>
+        </many-to-one>        
         <set name="notificacionDeEmergencias" table="NotificacionDeEmergencia" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="identificadorResidente" />

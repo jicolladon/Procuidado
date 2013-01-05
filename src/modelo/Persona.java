@@ -11,7 +11,6 @@ public class Persona implements java.io.Serializable {
 	private String nombre;
 	private String documentoId;
 	private String password;
-	private int identificadorPermiso;
 
 	public Persona() {
 	}
@@ -19,7 +18,6 @@ public class Persona implements java.io.Serializable {
 	public Persona(int identificador, String nombre, int identificadorPermiso) {
 		this.identificador = identificador;
 		this.nombre = nombre;
-		this.identificadorPermiso = identificadorPermiso;
 	}
 
 	public Persona(int identificador, String nombre, String documentoId,
@@ -28,7 +26,6 @@ public class Persona implements java.io.Serializable {
 		this.nombre = nombre;
 		this.documentoId = documentoId;
 		this.password = password;
-		this.identificadorPermiso = identificadorPermiso;
 	}
 
 	public int getIdentificador() {
@@ -61,14 +58,6 @@ public class Persona implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public int getIdentificadorPermiso() {
-		return this.identificadorPermiso;
-	}
-
-	public void setIdentificadorPermiso(int identificadorPermiso) {
-		this.identificadorPermiso = identificadorPermiso;
 	}
 
 }
