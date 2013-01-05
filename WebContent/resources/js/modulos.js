@@ -3,19 +3,33 @@ var procuidado = procuidado || {};
 procuidado.modulos = procuidado.modulos || {};
 (function (win, doc, mod, utils, _und_){
     "use strict";
+    /**
+     * Modulo principal, controla las vistas globalmente
+     */
     mod.principal = (function () {
     	var _init, _initDOMVars, _switchView,
     		_oContenido, _aSecciones;
     	
+    	/**
+    	 * Inicializa las variables del DOM
+    	 */
     	_initDOMVars = function () {
     		_oContenido = doc.getElementById("contenido");
     		_aSecciones = utils.dom.cssQuery(_oContenido, ".seccion");
     	};
 
+    	/**
+    	 * Inicializa el modulo
+    	 */
     	_init = function () {
     		_initDOMVars();
     	};
     	
+    	/**
+    	 * Conmuta de una vista a otra
+    	 * 
+    	 * @param {Object} oView Vista a mostrar
+    	 */
     	_switchView = function (oView) {
     		var nIndex = 0, nLength = _aSecciones.length, oElementoSeccion;
     		for (; nIndex < nLength; nIndex++) {
@@ -224,4 +238,15 @@ procuidado.modulos = procuidado.modulos || {};
             });
         }
     };
+    
+    mod.residentes = (function(){
+    	var _init;
+    	
+    	_init = function () {
+    		
+    	};
+    	return {
+    		init : _init
+    	};
+    }());
 }(window, document, procuidado.modulos, procuidado.utils));

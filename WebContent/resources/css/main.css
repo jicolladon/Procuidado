@@ -128,53 +128,52 @@ li.last {
   margin-bottom: 30px;
 }
 #cabeceraProcuidado img {
-  float: left;
+	float: left;
 }
 
 #cabeceraProcuidado h1 {
-  float: right;
-  font-size: 8em;
-  color: #933;
-  text-shadow: 2px 2px 2px #333;
-  font-family: 'Sail', sans-serif;
+    float: right;
+    font-size: 8em;
+    color: #933;
+    text-shadow: 2px 2px 2px #333;
+    font-family: 'Sail', sans-serif;
 }
 #cabeceraProcuidado h2 {
-  float: right;
-  margin-top: -20px;
-  padding-left: 80px;
-  font-size: 1.5em;
-  color: #104;
-  font-style: italic;
+    float: right;
+    margin-top: -20px;
+    padding-left: 80px;
+    font-size: 1.5em;
+    color: #104;
+    font-style: italic;
 }
 #residente {
-  width: 100%;
-  height: 100px;
-  overflow: hidden;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 #residente img {
-  float: left;
-  width: 70px;
-  height: 70px;
-  margin-right: 20px;
-  border-radius: 3px;
-  -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+    border-radius: 3px;
+    -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 #residente h1 {
-  font-size: 2em;
-  padding-top: 13px;
+    font-size: 2em;
+    padding-top: 13px;
 }
 
 #cuidadores {
-  width: 100%;
-  
+    width: 100%;
 }
 #cuidadoresActuales {
-  width: 40%;
-  float: left;
-  margin-right: 20px;
+    width: 40%;
+    float: left;
+    margin-right: 20px;
 }
 
 .subseccion {
@@ -186,157 +185,155 @@ li.last {
 }
 
 #cuidadoresActuales h1 {
-  
-  display: block;
-  width: 180px;
-  margin-left: auto;
-  margin-right: auto;
-  background: #FFF;
-  text-align: center;
+    display: block;
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #FFF;
+    text-align: center;
 }
 
 
 .fotoItem img {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .fotoItem > img,  #cuidadoresActuales figure > img {
-  width: 100px;
-  height: 100px;
-  border-radius: 3px;
-  -o-transition: all 0.5s;
-  -ie-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-  margin-right: 0px;
-  margin-bottom: 5px;
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+    -o-transition: all 0.5s;
+    -ie-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    margin-right: 0px;
+    margin-bottom: 5px;
 }
 
 .fotoItem:hover > img {
-  -moz-transform: rotate(3deg) scale(1.03);
-  -webkit-transform: rotate(3deg) scale(1.03);
-  transform: rotate(7deg) scale(1.03);
-  -moz-box-shadow: 6px 6px 2px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 6px 6px 2px rgba(0,0,0,0.5);
-  box-shadow: 6px 6px 6px rgba(0,0,0,0.5);
+    -moz-transform: rotate(3deg) scale(1.03);
+    -webkit-transform: rotate(3deg) scale(1.03);
+    transform: rotate(7deg) scale(1.03);
+    -moz-box-shadow: 6px 6px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 6px 6px 2px rgba(0,0,0,0.5);
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.5);
 }
 
 
 #datosCuidador {
-  width: 55%;
-  border: 1px solid #666;
-  float: left;
-  padding-left: 20px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+    width: 55%;
+    float: left;
+    padding-left: 20px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 #datosCuidador h1 {
-  display: block;
-  width: 180px;
-  margin-top: -5px;
-  background: #FFF;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+    display: block;
+    width: 180px;
+    margin-top: -5px;
+    background: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 #datosCuidador form {
-  width: 80%;
-  margin: 10px auto 0px auto;
+    width: 80%;
+    margin: 10px auto 0px auto;
 }
 
 label {
-  font-weight: bold;
-  display: block;
-  margin: 10px 0px 4px 0px;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0px 4px 0px;
 }
 
 input[type=text], input[type=password], textarea{
-  border: 1px solid #666;
-  margin-bottom: 10px;
-  -webkit-box-shadow: inset 2px 2px 2px 0px #dddddd;
-  -moz-box-shadow: inset 2px 2px 2px 0px #dddddd;
-  box-shadow: inset 2px 2px 2px 0px #dddddd;
+    border: 1px solid #666;
+    margin-bottom: 10px;
+    -webkit-box-shadow: inset 2px 2px 2px 0px #dddddd;
+    -moz-box-shadow: inset 2px 2px 2px 0px #dddddd;
+    box-shadow: inset 2px 2px 2px 0px #dddddd;
 }
 
 .fillinput {
-  width: 100%;
+    width: 100%;
 }
 
 input:focus, textarea:focus {
-  background: #EEF;
+    background: #EEF;
 }
 
 #leerCondicionesCuidador {
-  display: block;
-  margin: 10px 0px 4px 0px;
+    display: block;
+    margin: 10px 0px 4px 0px;
 }
 
 .fotoItem, #cuidadoresActuales figure {
-  width: 220px;
-  margin: 20px auto 0px auto;
+    width: 220px;
+    margin: 20px auto 0px auto;
 }
 .fotoItem img {
-  float: left;
+    float: left;
 }
 .fotoItem div {
-  display: block;
-  width: 100px;
-  float: left;
-  margin-left: 20px;
-  visibility: hidden;
-  opacity: 0;
-  -o-transition: all 0.5s;
-  -ie-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
+    display: block;
+    width: 100px;
+    float: left;
+    margin-left: 20px;
+    visibility: hidden;
+    opacity: 0;
+    -o-transition: all 0.5s;
+    -ie-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 .fotoItem:hover div {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 .fotoItem div a {
-  display: block;
+    display: block;
 }
 
 .fotoItem figcaption {
-  clear: both;
+    clear: both;
 }
 
 #modal {
-     visibility: hidden;
-     position: fixed;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:150%;
-     text-align:center;
-     z-index: 1000;
-     background: rgba(0,0,0,0.5);
+    visibility: hidden;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width:100%;
+    height:150%;
+    text-align:center;
+    z-index: 1000;
+    background: rgba(0,0,0,0.5);
 }
 
 #modal > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 700px;
-  height: 300px;
-  margin-top: -250px; 
-  margin-left: -350px;
-  background-color: #fff;
-  border:1px solid #000;
-  padding:15px;
-  text-align:center;
-  overflow: auto;
-  text-align: right;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 700px;
+    height: 300px;
+    margin-top: -250px; 
+    margin-left: -350px;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
+    overflow: auto;
+    text-align: right;
 }
 
 #modalContent {
-  text-align: left;
+    text-align: left;
 }
 .off {
 	display: none;
@@ -355,29 +352,28 @@ input:focus, textarea:focus {
 
 
 #residentesItems li {
-	margin-left: -10px;
-	-o-transition: all 0.5s;
-  	-ie-transition: all 0.5s;
-  	-webkit-transition: all 0.5s;
-  	-moz-transition: all 0.5s;
-  	transition: all 0.5s;
-	
-  	width: 110px;
+    margin-left: -10px;
+    -o-transition: all 0.5s;
+    -ie-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    width: 110px;
   	height: 110px;
 }
 
 #residentesItems li:hover {
-	margin-left: 0px;
+    margin-left: 0px;
 }
 
 
 #residentesItems img {
-	border-radius: 3px;
-	-moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  	-webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   	box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  	width: 100px;
-  	height: 100px;
+    width: 100px;
+    height: 100px;
   	-o-transition: all 0.5s;
   	-ie-transition: all 0.5s;
   	-webkit-transition: all 0.5s;
