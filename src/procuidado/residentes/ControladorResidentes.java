@@ -1,6 +1,7 @@
 package procuidado.residentes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +20,28 @@ public class ControladorResidentes {
 		 * @param idResidente identifica al residente  
 		 * @return Lista con los datos de los cuidadores(clave, valor)
 		 */
-		/*public void nuevoResidente(id) {
-			
-		}*/
-		public List<Map<String, Object> > obtenerCuidadoresResidente(int idResidente) {
+		public List< Map<String, Object> > obtenerCuidadoresResidente(int idResidente) {
 			List<Map <String, Object> > resultado = new ArrayList<Map <String, Object>>();
 			return resultado;
+		}
+		/**
+		 * Obtiene el id y la ruta de la imagen de perfil del residente con el id indicado
+		 * @param idResidente
+		 * @return Lista con el nombre y la foto del residente
+		 */
+		public Map<String, Object> obtenerResidente(int idResidente) {
+			Map <String, Object> residente = new HashMap<String, Object>();
+			residente.put("id", 1);
+			residente.put("pathImg","/resources/imagenes/residentes/000001.jpg");
+			residente.put("nombreYApellidos","Joan isaak Collado");
+			return residente;
+		}
+		/**
+		 * Asigna un residente a la casa en la que esta viviendo
+		 * @param idResidente
+		 */
+		public void asignarCasaAResidente(int idResidente) {
+			
 		}
 }
 
