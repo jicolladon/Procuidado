@@ -6,32 +6,32 @@ import org.hibernate.Session;
 
 import org.hibernate.*;
 
-public class PersonaTest {
+import procuidado.controlDatos.FactoriaControlDatos;
 
+public class PersonaTest {
+	private static int iden;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		PersonaTest pt = new PersonaTest();
 		pt.createStore();
-		 List personas = pt.allInstances();
-         for (int i = 0; i < personas.size(); i++) {
-             Persona p = (Persona) personas.get(i);
-             System.out.println(
-                     "Nombre: " + p.getNombre() + " DNI: " + p.getDocumentoId()
-             );
-         }
+		Cuidador c = pt.get(iden);
+		System.out.println("Telf: " + c.getTelefono1() + " Nombre: " + c.getNombre());
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
 	
 	private void createStore(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		Persona p = new Persona();
+		Cuidador p = new Cuidador();
 		p.setDocumentoId("1234");
-		p.setNombre("Test Testington II");
+		p.setNombre("Test Testington IX");
 		p.setPassword("myPass");
+		p.setTelefono1("123456789");
 		session.save(p);
+		iden = p.getIdentificador();
+		System.out.println(iden);
 		session.getTransaction().commit();
 	}
 	
@@ -41,6 +41,10 @@ public class PersonaTest {
 		List result = session.createQuery("from Persona").list();
 	    session.getTransaction().commit();
 	    return result;
+	}
+	
+	private Cuidador get(int id){
+		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(id);
 	}
 
 }

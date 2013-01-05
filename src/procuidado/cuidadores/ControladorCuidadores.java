@@ -10,7 +10,7 @@ public class ControladorCuidadores {
 	private ControladorCuidadores(){};
 	
 	public static ControladorCuidadores getInstance() {
-		if (instance != null) {
+		if (instance == null) {
 			instance = new ControladorCuidadores();
 		}
 		return instance;
