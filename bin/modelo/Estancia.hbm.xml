@@ -20,12 +20,6 @@
         <property name="tiempoDePermanenciaMaxima" type="int">
             <column name="tiempoDePermanenciaMaxima" not-null="true" />
         </property>
-        <set name="emergenciaDeResidentePorPermanenciaProlongadas" table="EmergenciaDeResidentePorPermanenciaProlongada" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identificadorEstancia" not-null="true" />
-            </key>
-            <one-to-many class="modelo.EmergenciaDeResidentePorPermanenciaProlongada" />
-        </set>
         <set name="residentes" table="Residente" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="estanciaActual" />

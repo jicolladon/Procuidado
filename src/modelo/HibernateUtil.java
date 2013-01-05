@@ -3,13 +3,15 @@ package modelo;
 import org.hibernate.SessionFactory;  
 import org.hibernate.cfg.Configuration;  
   
+@SuppressWarnings("deprecation")
 public class HibernateUtil {  
       
     private static SessionFactory sessionFactory;  
       
     static{  
-        try {  
-            sessionFactory = new Configuration().configure().buildSessionFactory();  
+        try {
+        	//Configuration cfg = new Configuration().addResource("hibernate.reveng.xml")
+            sessionFactory = new Configuration().addResource("hibernate.reveng.xml").configure().buildSessionFactory();  
         } catch (Throwable e) {  
             throw new ExceptionInInitializerError(e);  
         }  
@@ -23,4 +25,5 @@ public class HibernateUtil {
         //closes caches and connections  
         getSessionFactory().close();  
     }  
-}  
+} 
+
