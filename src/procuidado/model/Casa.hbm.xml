@@ -3,12 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="modelo.Casa" table="casa" catalog="procuidado">
+    <class name="procuidado.model.Casa" table="casa" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="identificador" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="cuidador" class="modelo.Cuidador" fetch="select">
+        <many-to-one name="cuidador" class="procuidado.model.Cuidador" fetch="select">
             <column name="identificadorAdministrador" not-null="true" unique="true" />
         </many-to-one>
         <property name="calle" type="string">
@@ -54,13 +54,13 @@
             <key>
                 <column name="identificadorCasa" />
             </key>
-            <one-to-many class="modelo.Residente" />
+            <one-to-many class="procuidado.model.Residente" />
         </set>
         <set name="estancias" table="Estancia" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="identificadorCasa" unique="true" />
             </key>
-            <one-to-many class="modelo.Estancia" />
+            <one-to-many class="procuidado.model.Estancia" />
         </set>
     </class>
 </hibernate-mapping>

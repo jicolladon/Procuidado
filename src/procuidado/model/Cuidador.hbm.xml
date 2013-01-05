@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="modelo.Cuidador" table="cuidador" catalog="procuidado">
+    <class name="procuidado.model.Cuidador" table="cuidador" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="identificador" />
         </id>
@@ -20,7 +20,7 @@
             <key>
                 <column name="identificadorCuidador" not-null="true" />
             </key>
-            <many-to-many entity-name="modelo.Residente">
+            <many-to-many entity-name="procuidado.model.Residente">
                 <column name="identificadorResidente" not-null="true" />
             </many-to-many>
         </set>
@@ -28,7 +28,7 @@
             <key>
                 <column name="identificadorAdministrador" not-null="true" unique="true" />
             </key>
-            <one-to-many class="modelo.Casa" />
+            <one-to-many class="procuidado.model.Casa" />
         </set>
     </class>
 </hibernate-mapping>
