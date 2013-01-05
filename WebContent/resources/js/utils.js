@@ -33,7 +33,7 @@ procuidado.utils = procuidado.utils || {};
 	};
 	
 	utils.dom = (function () {
-		var _addClass, _hasClass, _removeClass;
+		var _addClass, _hasClass, _removeClass, _cssQuery, _serializeForm;
 		
 		/**
 		 * Devuelve la expresion regular para encontrar una clase css
@@ -96,11 +96,18 @@ procuidado.utils = procuidado.utils || {};
 			}
 		};
 		
+		/**
+		 * Serializa el formulario
+		 */
+		_serializeForm = function (oForm) {
+			
+		};
 		return {
 			addClass : _addClass,
 			hasClass : _hasClass,
 			removeClass : _removeClass,
-			cssQuery : _cssQuery
+			cssQuery : _cssQuery,
+			serializeForm : _serializeForm
 		};
 	}());
 }(window, document, procuidado.utils, $));

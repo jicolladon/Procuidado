@@ -56,7 +56,8 @@ procuidado.modulos = procuidado.modulos || {};
             _oMenuItem, _oView, _nIdResidente=1, _putCuidadores,
             _oCuidadoresActuales, _sCondiciones = "Condiciones bla bla bla",
             _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
-            _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador;
+            _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
+            _oConfirmarDatosCuidador;
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -182,6 +183,13 @@ procuidado.modulos = procuidado.modulos || {};
         };
         
         /**
+         * Salva los datos del formulario
+         */
+        _confirmarDatosCuidador = function () {
+        	
+        };
+        
+        /**
          * Inicializa los eventos
          */
         _initEvents = function () {
@@ -189,6 +197,7 @@ procuidado.modulos = procuidado.modulos || {};
             utils.events.addEvent(_oVerCondiciones, "click", _verCondiciones);
             utils.events.addEvent(_oMenuItem, "click", _switchCuidadores);
             utils.events.addEvent(_oCuidadoresActuales, "click", _accionCuidadorActual);
+            utils.events.addEvent(_oConfirmarDatosCuidador, "click", _confirmarDatosCuidador);
         };
 
         /**
@@ -204,6 +213,7 @@ procuidado.modulos = procuidado.modulos || {};
             _oTituloDatosCuidador = doc.getElementById("tituloDatosCuidador");
             _oFormCuidador = doc.getElementById("formCuidador");
             _oFotoCuidador = doc.getElementById("fotoCuidador");
+            _oConfirmarDatosCuidador = doc.getElementById("enviarDatosCuidador");
         };
 
         /**
