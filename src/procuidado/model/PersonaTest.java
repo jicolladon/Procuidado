@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import org.hibernate.*;
-
 import procuidado.controlDatos.FactoriaControlDatos;
 
 public class PersonaTest {
@@ -35,6 +33,7 @@ public class PersonaTest {
 		session.getTransaction().commit();
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unused" })
 	private List allInstances(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
