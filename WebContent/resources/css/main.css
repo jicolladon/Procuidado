@@ -25,6 +25,7 @@ body {
   z-index: 20;
   min-height: 500px;
   position: relative;
+  behavior: url(../resources/js/polyfills/ie-css3.htc); /* Activamos el soporte para IE */
 }
 
 nav {
@@ -55,6 +56,7 @@ nav {
   box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
   border-radius: 3px;
   display: table;
+  behavior: url(../resources/js/polyfills/ie-css3.htc); /* Activamos el soporte para IE */
 }
 
 #mainMenu li {
@@ -161,6 +163,7 @@ li.last {
     -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    behavior: url(../resources/js/polyfills/ie-css3.htc); /* Activamos el soporte para IE */
 }
 #residente h1 {
     font-size: 2em;
@@ -257,6 +260,7 @@ input[type=text], input[type=password], textarea{
     -webkit-box-shadow: inset 2px 2px 2px 0px #dddddd;
     -moz-box-shadow: inset 2px 2px 2px 0px #dddddd;
     box-shadow: inset 2px 2px 2px 0px #dddddd;
+    behavior: url(../resources/js/polyfills/ie-css3.htc); /* Activamos el soporte para IE */
 }
 
 .fillinput {
@@ -379,4 +383,13 @@ input:focus, textarea:focus {
   	-webkit-transition: all 0.5s;
   	-moz-transition: all 0.5s;
   	transition: all 0.5s;
+  	behavior: url(../resources/js/polyfills/ie-css3.htc); /* Activamos el soporte para IE */
+}
+
+#sbmEnviaFotoCuidador {
+	display: block;
+}
+
+.errorCampo {
+	color: #FF4444;
 }

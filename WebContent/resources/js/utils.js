@@ -32,6 +32,13 @@ procuidado.utils = procuidado.utils || {};
 		$.ajax(sUrl, oOptions);
 	};
 	
+	utils.each = function (aArray, fpCallback) {
+		var nIndex = 0, nLength = aArray.length;
+		for (; nIndex < nLength; nIndex++) {
+			fpCallback.call(aArray[nIndex]);
+		}
+	};
+	
 	utils.dom = (function () {
 		var _addClass, _hasClass, _removeClass, _cssQuery, _serializeForm;
 		
@@ -102,12 +109,76 @@ procuidado.utils = procuidado.utils || {};
 		_serializeForm = function (oForm) {
 			return $(oForm).serialize();
 		};
+		
+		/**
+		 * Valida un formulario
+		 * 
+		 * @param {Object} oForm Formulario del DOM
+		 * @param {Array} aFieldSchema Definición de los campos
+		 * ej: { 
+		 * 		nombre : { 
+		 * 			empty : false, 
+		 * 			type : "number"
+		 * 			negative : false
+		 * 			emptyMessage : "El campo no puede ser vacio"
+		 * 			negativeMessage : "El numero ha de ser positivo"
+		 * 			wrongTypeMessage : "El campo ha de ser un numero"
+		 * 		}
+		 * En este ejemplo se define un campo que no puede estar vacio y el tipo es numerico positivo
+		 */
+		_validateForm = function (oForm, oFieldSchema) {
+			var nLength = oForm.length, nIndex = 0, oField,
+				bValido = true, oData = {}, oValue;
+			for (; nIndex < nLength; nIndex++) {
+				oField = oForm[nIndex];
+				oSchema = oFieldSchema[oForm[nIndex].name];
+				if (oSchema !== _und_){
+					switch (oSchema.type) {
+						case "string":
+							if (oSchema.empty !== _und_ && oSchema.empty === false) {
+								if (oField.value === "") {
+									bValido = false;
+									oData[oField.name] = oSchema.emptyMessage || "Empty field";
+								}
+							}
+							break;
+						case "number":
+							if (isNaN(parseInt(oValue, 10))) {
+								bValido = false;
+								oData[oField.name] = oSchema.wrongTypeMessage || "Wrong type";
+								
+							} else {
+								if (oSchema.negative !== _und_ && oSchema.negative === false) {
+									if (oField.value < 0) {
+										bValido = false;
+										oData[oField.name] = oSchema.negativeMessage || "Negative number";
+									}
+								}
+							}
+							break;
+						case "check":
+							if (oSchema.requireTrue !== _und_ && oField.checked !== _und_ && oField.checked === false) {
+								bValido = false;
+								oData[oField.name] = oSchema.requireTrueMessage || "Require true";
+							}
+							break;
+					}
+					if (!bValido) 
+						if (typeof oSchema.wrongCallback === "function") oSchema.wrongCallback();
+				}
+				
+			}
+			
+			oData.valid = bValido;
+			return oData;
+		};
 		return {
 			addClass : _addClass,
 			hasClass : _hasClass,
 			removeClass : _removeClass,
 			cssQuery : _cssQuery,
-			serializeForm : _serializeForm
+			serializeForm : _serializeForm,
+			validateForm : _validateForm
 		};
 	}());
 }(window, document, procuidado.utils, $));

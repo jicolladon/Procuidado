@@ -8,7 +8,7 @@ procuidado.modulos = procuidado.modulos || {};
      */
     mod.principal = (function () {
     	var _init, _initDOMVars, _switchView,
-    		_oContenido, _aSecciones;
+    		_oContenido, _aSecciones, _mostrar, _ocultar, _quitarPonerClase;
     	
     	/**
     	 * Inicializa las variables del DOM
@@ -43,9 +43,42 @@ procuidado.modulos = procuidado.modulos || {};
     		}
     	};
     	
+    	/**
+    	 * Muestra un elemento, asigna la clase on y quita la clase off
+    	 * 
+    	 * @param {Object} oElemento Elemento del DOM
+    	 */
+    	_mostrar = function (oElemento) {
+    		_quitarPonerClase(oElemento, "off", "on");
+    	};
+    	
+    	/**
+    	 * Oculta un elemento asignando la clase off y quitando la clase on
+    	 * 
+    	 * @param {Object} oElemento Elemento del DOM
+    	 */
+    	_ocultar = function (oElemento) {
+    		_quitarPonerClase(oElemento, "on", "off");
+    	};
+    	
+    	
+    	/**
+    	 * Quita una clase y pone otra
+    	 * 
+    	 * @param {Object} oElemento Elemento del DOM
+    	 * @param {String} sClaseAQuitar Clase que se borrara
+    	 * @param {String} sClaseAPoner Clase que se insertara
+    	 */
+    	_quitarPonerClase = function (oElemento, sClaseAQuitar, sClaseAPoner) {
+        		utils.dom.removeClass(oElemento, sClaseAQuitar);
+        		utils.dom.addClass(oElemento, sClaseAPoner);
+    	};
+    	
     	return {
     		init : _init,
-    		switchView : _switchView
+    		switchView : _switchView,
+    		mostrar : _mostrar,
+    		ocultar : _ocultar
     	};
     }());
     mod.cuidadores = (function (){
@@ -57,7 +90,8 @@ procuidado.modulos = procuidado.modulos || {};
             _oCuidadoresActuales, _sCondiciones = "Condiciones bla bla bla",
             _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
             _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
-            _oConfirmarDatosCuidador, _confirmarDatosCuidador;
+            _oConfirmarDatosCuidador, _confirmarDatosCuidador,
+            _refrescarCuidadores, _quitarErroresFormulario;
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -87,6 +121,13 @@ procuidado.modulos = procuidado.modulos || {};
         	oEvent = oEvent || window.event;
         	oEvent.preventDefault();
         	mod.principal.switchView(_oView);
+        	_refrescarCuidadores();
+        };
+        
+        /**
+         * Pide los cuidadores al servidor y los actualiza
+         */
+        _refrescarCuidadores = function () {
         	utils.ajax("/cuidadores?idResidente=" + _nIdResidente, {
         		success : _putCuidadores,
         		error : function (oData) {
@@ -94,7 +135,7 @@ procuidado.modulos = procuidado.modulos || {};
         			console.dir(oData);
         		}
         	});
-        };
+        }
         
         /**
          * Añade los cuidadores a la lista de cuidadores actuales
@@ -150,8 +191,10 @@ procuidado.modulos = procuidado.modulos || {};
         	}
         	//obtenemos el id del cuidador
         	idCuidador = oParent.id;
-        	if (idCuidador !== _und_ && sClassLink.indexOf("editarCuidador") !== -1) {
+        	if (idCuidador !== _und_) {
         		idCuidador = idCuidador.replace("id-", "");
+        	}
+        	if (sClassLink.indexOf("editarCuidador") !== -1) {
         		//Hacemos la peticion al servidor
         		utils.ajax("/cuidadores/" + idCuidador, {
         			success : _mostrarEditarCuidador,
@@ -161,7 +204,28 @@ procuidado.modulos = procuidado.modulos || {};
         			}
         		});
         	} else if (sClassLink.indexOf("crearCuidador") !== -1) {
-        		console.log("hay que crear un cuidador");
+        		_quitarErroresFormulario();
+        		utils.dom.removeClass(_oDatosCuidador, "off");
+        		_oFormCuidador.reset();
+        		_oFormCuidador.idResidente.value = _nIdResidente;
+        		_oTituloDatosCuidador.innerText = "Nuevo cuidador";
+        		utils.dom.removeClass(doc.getElementById("datosLoginCuidador"), "off");
+        		utils.dom.addClass(doc.getElementById("datosLoginCuidador"), "on");
+        		utils.dom.removeClass(_oFotoCuidador, "on");
+        		utils.dom.addClass(_oFotoCuidador, "off");
+        	} else if (sClassLink.indexOf("borrarCuidador") !== -1) {
+        		if (confirm("¿Estas seguro de querer eliminar este cuidador?")) {
+	        		utils.ajax("/cuidadores/borrar/" + idCuidador, {
+	        			success : function () {
+	        				mod.modal.open("<h1>Cuidador eliminado con exito</h1>");
+	        				_refrescarCuidadores();
+	        			},
+	        			error : function (oData) {
+	        				alert("Se ha producido un error al intentar eliminar el cuidador");
+	        				console.dir(oData);
+	        			}
+	        		});
+        		}
         	}
         };
         
@@ -171,24 +235,133 @@ procuidado.modulos = procuidado.modulos || {};
          * @param {Object} oCuidador El cuidador que se debe mostrar para editar
          */
         _mostrarEditarCuidador = function (oCuidador) {
-        	utils.dom.removeClass(_oDatosCuidador, "off");
+        	var oDatosLogin = doc.getElementById("datosLoginCuidador");
+        	_quitarErroresFormulario();
+        	mod.principal.mostrar(_oDatosCuidador);
         	_oTituloDatosCuidador.innerText = "Editar cuidador";
         	_oFormCuidador.reset();
-        	utils.dom.addClass(doc.getElementById("datosLoginCuidador"), "off");
-        	_oFormCuidador.nombreCuidador.value = oCuidador.nombre;
-        	_oFormCuidador.apellidosCuidador.value = oCuidador.apellidos;
-        	_oFormCuidador.tipoDocumentoCuidador.value = oCuidador.tipoDocumento;
-        	_oFormCuidador.numeroDocumentoCuidador.value = oCuidador.numeroDocumento;
-        	_oFormCuidador.numeroTelefonoCuidador.value = oCuidador.numeroTelefono;
-        	_oFotoCuidador.src = oCuidador.pathImg;
-        	utils.dom.removeClass(_oFotoCuidador, "off");
+        	mod.principal.ocultar(oDatosLogin);
+        	_oFormCuidador.nombreCuidador.value = oCuidador.nombre || "";
+        	_oFormCuidador.apellidosCuidador.value = oCuidador.apellidos || "";
+        	_oFormCuidador.tipoDocumentoCuidador.value = oCuidador.tipoDocumento || "";
+        	_oFormCuidador.numeroDocumentoCuidador.value = oCuidador.numeroDocumento || "";
+        	_oFormCuidador.numeroTelefonoCuidador.value = oCuidador.numeroTelefono || "";
+        	_oFormCuidador.cuidadorPorDefecto.checked = oCuidador.cuidadorPorDefecto === "SI";
+        	_oFotoCuidador.src = oCuidador.pathImg || "";
+        	_oFormCuidador.idCuidador.value = oCuidador.id;
+        	mod.principal.mostrar(_oFotoCuidador);
         };
         
         /**
          * Salva los datos del formulario
          */
         _confirmarDatosCuidador = function () {
-        	console.dir(utils.dom.serializeForm(_oFormCuidador));
+        	var sUrl;
+        	_quitarErroresFormulario();
+        	//validamos el formulario
+        	if (utils.dom.validateForm(_oFormCuidador, {
+        		"nombreUsuario" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("nombreUsuarioError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"contraUsuario" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("contraUsuarioError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"nombreCuidador" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("nombreCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"apellidosCuidador" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("apellidosCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"tipoDocumentoCuidador" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("tipoDocumentoCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"numeroDocumentoCuidador" : {
+        			type : "number",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("numeroDocumentoCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio y ha de ser un numero";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"pathImgCuidador" : {
+        			type : "string",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("fotoCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
+        		"aceptaCondicionesCuidador" : {
+        			type : "check",
+        			requireTrue : true,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("aceptaCondicionesCuidadorError");
+        				oElemento.innerText = "Tiene que aceptar las condiciones";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		}
+        	}).valid) {
+	        	if (_oFormCuidador.idCuidador === _und_ && _oFormCuidador.idCuidador.value !== "") {
+	        		sUrl = "/cuidadores/editar"
+	        	} else {
+	        		sUrl = "/cuidadores/nuevo"
+	        	}
+	        	utils.ajax(sUrl, {
+	    			type: "POST",
+	    			success : function (oData) {
+	    				mod.modal.open("<h1>La operacion se ha realizado correctamente</h1>");
+	    				_oFormCuidador.idCuidador = oData.id;
+	    				_oTituloDatosCuidador.innerText = "Editar cuidador";
+	    				_refrescarCuidadores();
+	    			},
+	    			error : function (oData) {
+	    				alert("Se ha producido un error al crear el cuidador");
+	    				console.dir(oData);
+	    			},
+	    			data : utils.dom.serializeForm(_oFormCuidador)
+	    		});
+        	}
+        };
+        
+        /**
+         * Oculta los errores en el formulario
+         */
+        _quitarErroresFormulario = function () {
+        	utils.each (utils.dom.cssQuery(doc, ".errorCampo"), function () {
+        		mod.principal.ocultar(this);
+        	});
         };
         
         /**
@@ -214,7 +387,7 @@ procuidado.modulos = procuidado.modulos || {};
             _oDatosCuidador = doc.getElementById("datosCuidador");
             _oTituloDatosCuidador = doc.getElementById("tituloDatosCuidador");
             _oFormCuidador = doc.getElementById("formCuidador");
-            _oFotoCuidador = doc.getElementById("fotoCuidador");
+            _oFotoCuidador = doc.getElementById("fotoCuidadorImg");
             _oConfirmarDatosCuidador = doc.getElementById("enviarDatosCuidador");
         };
 
@@ -225,6 +398,9 @@ procuidado.modulos = procuidado.modulos || {};
             _initDOMVars();
             _initEvents();
         };
+        
+        
+        
         return {
             init : _init
         };
