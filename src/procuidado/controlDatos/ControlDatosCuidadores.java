@@ -1,7 +1,5 @@
 package procuidado.controlDatos;
 
-import java.util.List;
-
 import org.hibernate.Session;
 
 import procuidado.controlDatosInterfaces.IControlDatosCuidadores;
