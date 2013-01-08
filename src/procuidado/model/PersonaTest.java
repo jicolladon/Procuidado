@@ -15,8 +15,8 @@ public class PersonaTest {
 	 */
 	public static void main(String[] args) {
 		PersonaTest pt = new PersonaTest();
-		pt.createStore();
-		Cuidador c = pt.get(iden);
+		//pt.createStore();
+		Cuidador c = pt.get(19);
 		System.out.println("Telf: " + c.getTelefono1() + " Nombre: " + c.getNombre());
 		for(int i = 0; i < c.getRestricciones().size(); i++){
 			Object[] rh = c.getRestricciones().toArray();
@@ -31,15 +31,15 @@ public class PersonaTest {
 		session.beginTransaction();
 		Cuidador p = new Cuidador();
 		p.setDocumentoId("1234");
-		p.setNombre("Test Testington XIV");
+		p.setNombre("Test Testington XVI");
 		p.setPassword("myPass");
 		p.setTelefono1("111222333");
 		session.save(p);
 		iden = p.getIdentificador();
 		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("11", "lunes", p.getIdentificador(), "13")));
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("15", "lunes", p.getIdentificador(), "17")));
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("11", "martes", p.getIdentificador(), "13")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("12", "lunes", p.getIdentificador(), "13")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("14", "lunes", p.getIdentificador(), "17")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("10", "martes", p.getIdentificador(), "13")));
 		p.setRestricciones(r);
 		session.save(p);
 		System.out.println(iden);
