@@ -27,7 +27,6 @@ public class ControladorCuidadores {
 	public Map<String, Object> obtenerCuidador(int idCuidador) {
 		Map <String, Object> cuidadorHash = new HashMap<String, Object>();
 		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(19);
-		System.out.println("UEEEEEEEEEEEEEE ");
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
 		cuidadorHash.put("pathImg","/resources/imagenes/cuidadores/000001.jpg");
@@ -38,7 +37,7 @@ public class ControladorCuidadores {
 		cuidadorHash.put("tipoDocumento", "DNI");
 		cuidadorHash.put("numeroDocumento",  cuidador.getDocumentoId());
 		cuidadorHash.put("cuidadorPorDefecto", cuidador.isEsCuidadorPorDefecto());
-
+		
 		List<Map <String, Object> > restricciones = new ArrayList<Map <String, Object>>();
 		Map <String, Object> restriccion = new HashMap<String, Object>();
 		Object[] rh = cuidador.getRestricciones().toArray();
