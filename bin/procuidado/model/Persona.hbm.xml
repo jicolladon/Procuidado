@@ -28,7 +28,7 @@
 	        <property name="telefono2" type="string">
 	            <column name="telefono2" length="50" />
 	        </property>
-	        <set name="residentes" table="CuidadorResidente" inverse="false" lazy="true" fetch="select">
+	        <set name="residentes" table="CuidadorResidente" cascade="save-update,delete-orphan" inverse="false" lazy="true" fetch="select">
 	            <key>
 	                <column name="identificadorCuidador" not-null="true" />
 	            </key>
@@ -42,7 +42,7 @@
 	            </key>
 	            <one-to-many class="procuidado.model.Casa" />
 	        </set>
-	        <set name="restricciones" table="restriccionhoraria" inverse="true" cascade="delete-orphan" lazy="false" fetch="select">
+	        <set name="restricciones" table="restriccionhoraria" inverse="true" cascade="save-update, delete-orphan" lazy="false" fetch="select">
 	            <key>
 	                <column name="identificadorCuidador" not-null="true" unique="true" />
 	            </key>
