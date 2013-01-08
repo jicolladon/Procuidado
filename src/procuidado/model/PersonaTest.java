@@ -1,6 +1,8 @@
 package procuidado.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 
@@ -16,6 +18,11 @@ public class PersonaTest {
 		pt.createStore();
 		Cuidador c = pt.get(iden);
 		System.out.println("Telf: " + c.getTelefono1() + " Nombre: " + c.getNombre());
+		for(int i = 0; i < c.getRestricciones().size(); i++){
+			RestriccionHoraria rh[] = (RestriccionHoraria[]) c.getRestricciones().toArray();
+			System.out.println("Hora de inicio: " + rh[i].getId().getHoraInici() + "Hora Final: " + rh[i].getId().getHoraFin()
+			+ "Dia de la semana: " + rh[i].getId().getDiaSemana());
+		}
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
 	
@@ -29,6 +36,12 @@ public class PersonaTest {
 		p.setTelefono1("123456789");
 		session.save(p);
 		iden = p.getIdentificador();
+		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("11", "lunes", p.getIdentificador(), "13")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("15", "lunes", p.getIdentificador(), "17")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("11", "martes", p.getIdentificador(), "13")));
+		p.setRestricciones(r);
+		session.save(p);
 		System.out.println(iden);
 		session.getTransaction().commit();
 	}
@@ -37,7 +50,7 @@ public class PersonaTest {
 	private List allInstances(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List result = session.createQuery("from Persona").list();
+		List result = session.createQuery("from Cuidador").list();
 	    session.getTransaction().commit();
 	    return result;
 	}

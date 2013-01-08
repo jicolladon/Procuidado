@@ -16,6 +16,7 @@ public class Cuidador extends Persona implements java.io.Serializable
 	private String telefono2;
 	private Set residentes = new HashSet(0);
 	private Set casas = new HashSet(0);
+	private Set restricciones = new HashSet(0);
 
 	public Cuidador() {
 	}
@@ -94,6 +95,15 @@ public class Cuidador extends Persona implements java.io.Serializable
 	public void setCasas(Set casas)
 	{
 		this.casas = casas;
+	}
+	public Set getRestricciones()
+	{
+		return this.restricciones;
+	}
+
+	public void setRestricciones(Set restricciones)
+	{
+		this.restricciones = restricciones;
 	}
 
 }

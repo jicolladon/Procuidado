@@ -14,6 +14,7 @@
         <property name="hibernate.search.autoregister_listeners">false</property>
         <mapping resource="procuidado/model/Estancia.hbm.xml" />
         <mapping resource="procuidado/model/Casa.hbm.xml" />
-        <mapping resource="procuidado/model/Persona.hbm.xml" />
+        <mapping resource="procuidado/model/Persona.hbm.xml" />        
+        <mapping resource="procuidado/model/RestriccionHoraria.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

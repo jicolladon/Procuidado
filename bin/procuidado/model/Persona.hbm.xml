@@ -42,6 +42,12 @@
 	            </key>
 	            <one-to-many class="procuidado.model.Casa" />
 	        </set>
+	        <set name="restricciones" table="restriccionhoraria" inverse="true" cascade="delete-orphan" lazy="false" fetch="select">
+	            <key>
+	                <column name="identificadorCuidador" not-null="true" unique="true" />
+	            </key>
+	            <one-to-many class="procuidado.model.RestriccionHoraria" />
+	        </set>
         </joined-subclass>
         <joined-subclass name="procuidado.model.Residente" table="residente" catalog="procuidado">
         	<key column="identificador"/>
