@@ -10,7 +10,6 @@ public class HibernateUtil {
       
     static{  
         try {
-        	//Configuration cfg = new Configuration().addResource("hibernate.reveng.xml")
             sessionFactory = new Configuration().addResource("hibernate.reveng.xml").configure().buildSessionFactory();  
         } catch (Throwable e) {  
             throw new ExceptionInInitializerError(e);  

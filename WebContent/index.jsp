@@ -10,6 +10,7 @@
   <script type="text/javascript" src="resources/js/utils.js"></script>
   <script type="text/javascript" src="resources/js/modulos.js"></script>
   <script type="text/javascript" src="resources/js/main.js"></script>
+  <script type="text/javascript" src="resources/js/polyfills/webforms/webforms2.js"></script>
 </head>
 <body>
     <div id="modal">
@@ -60,8 +61,8 @@
             </nav>
             <div id="contenido">
             <article id="residente">
-                <img src="resources/imagenes/residentes/000001.jpg" />
-                <h1>Jose Maria Perez Burrull</h1>
+                <img id="imagenResidenteActual" src="" />
+                <h1 id="nombreYApellidosResidenteActual" ></h1>
             </article>
             <article id="cuidadores" class="seccion off">
                 <header>
@@ -77,22 +78,30 @@
                     <form id="formCuidador" name="formCuidador">
                     	<div id="datosLoginCuidador">
                         <label for="nombreUsuario">Nombre de usuario (*):</label>
+                        <p id="nombreUsuarioError" class="errorCampo off"></p>
                         <input type="text" name="nombreUsuario" id="nombreUsuario" class="fillinput" />
                         <label for="contraUsuario">Contraseña (*):</label>
+                        <p id="contraUsuarioError" class="errorCampo off"></p>
                         <input type="password" name="contraUsuario" id="contraUsuario" class="fillinput" />
                         </div>
                         <label for="nombreCuidador">Nombre(*):</label>
+                        <p id="nombreCuidadorError" class="errorCampo off"></p>
                         <input type="text" name="nombreCuidador" id="nombreCuidador" class="fillinput" />
                         <label for="apellidosCuidador">Apellidos (*):</label>
+                        <p id="apellidosCuidadorError" class="errorCampo off"></p>
                         <input type="text" name="apellidosCuidador" id="apellidosCuidador" class="fillinput" />
                         <label for="tipoDocumentoCuidador">Tipo documento (*): </label>
+                        <p id="tipoDocumentoCuidadorError" class="errorCampo off"></p>
                         <select id="tipoDocumentoCuidador" name="tipoDocumentoCuidador">
                             <option value="DNI">DNI</option>
                         </select>
+                        <p id="numeroDocumentoCuidadorError" class="errorCampo off"></p>
                         <input type="text" name="numeroDocumentoCuidador" id="numeroDocumentoCuidador" />
                         <label for="numeroTelefonoCuidador">Numero de telefono (*): </label>
+                        <p id="numeroTelefonoCuidadorError" class="errorCampo off"></p>
                         <input type="text" name="numeroTelefonoCuidador" id="numeroTelefonoCuidador" class="fillinput" />
                         <label for="restriccionesCuidador">Restricciones: </label>
+                        <p id="restriccionesCuidadorError" class="errorCampo off"></p>
                         <select id="diaRestriccionCuidador" name="diaRestriccionCuidador" >
                             <option value="lunes">Lunes</option>
                             <option value="martes">Martes</option>
@@ -159,13 +168,21 @@
                         <button type="button" name="nuevaRestriccionCuidador" id="nuevaRestriccionCuidador">Añadir</button>
                         <textarea name="restriccionesCuidador" id="restriccionesCuidador" readonly rows="5" class="fillinput"></textarea>
                         <label for="fotoCuidador">Foto: </label>
-                        <img src="" id="fotoCuidador" width="100" height="100" />
-                        <input type="file" name="fotoCuidador" id="fotoCuidador" class="off" />
+                        <p id="fotoCuidadorError" class="errorCampo off"></p>
+	                    <img src="" id="fotoCuidadorImg" width="100" height="100" />
+	                    <input type="file" name="fotoCuidador" id="fotoCuidador" class="on" />
+	                    <button formmethod="post" formenctype="multipart/form-data" formtarget="enviaFotoCuidador" formaction="/cuidadores/cambiarFoto" type="submit" name="sbmEnviaFotoCuidador" id="sbmEnviaFotoCuidador">Subir foto</button>
+                        <iframe id="enviaFotoCuidador" name="enviaFotoCuidador" class="off"></iframe>
                         <label for="cuidadorPorDefecto"> ¿Es cuidador por defecto?</label>
-                        <input type="checkbox" name="cuidadorPorDefecto" id="cuidadorPorDefecto" />
+                        <input type="checkbox" name="cuidadorPorDefecto" id="cuidadorPorDefecto" value="SI" />
                         <label for="aceptaCondicionesCuidador">Acepto condiciones de uso</label>
-                        <input type="checkbox" name="aceptaCondicionesCuidador" id="aceptaCondicionesCuidador" />
+                        <p id="aceptaCondicionesCuidadorError" class="errorCampo off"></p>
+                        <input type="checkbox" name="aceptaCondicionesCuidador" id="aceptaCondicionesCuidador" value="si" />
                         <a href="#" id="leerCondicionesCuidador">Visualizar terminos y condiciones de uso</a>
+                        <!--  Campos ocultos -->
+                        <input id="idCuidador" name="idCuidador" type="hidden" />
+                        <input id="idResidente" name="idResidente" type="hidden" />
+                        <!-- Fin de Campos ocultos -->
                         <button type="button" name="enviarDatosCuidador" id="enviarDatosCuidador">Confirmar</button>
                         <button type="button" name="cancelarDatosCuidador" id="cancelarDatosCuidador">Cancelar</button>
                     </form>

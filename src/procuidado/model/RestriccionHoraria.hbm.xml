@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2013 11:21:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="procuidado.model.RestriccionHoraria" table="restriccionhoraria" catalog="procuidado">
+        <composite-id name="id" class="procuidado.model.RestriccionHorariaId">
+            <key-property name="horaInici" >
+            	<column name="horaInici" not-null="true" />
+            </key-property>
+            <key-property name="diaSemana" >
+            	<column name="diaSemana" not-null="true" />
+            </key-property>
+            <key-property name="identificadorCuidador" >
+            	<column name="identificadorCuidador" not-null="true" />
+            </key-property>
+            <key-property name="horaFin" >
+            	<column name="horaFin" not-null="true" />
+            </key-property>
+            <generator class="assigned" />
+        </composite-id>
+    </class>
+</hibernate-mapping>
