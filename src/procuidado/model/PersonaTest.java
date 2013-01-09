@@ -23,7 +23,7 @@ public class PersonaTest {
 			System.out.println("Hora de inicio: " + ((RestriccionHoraria) rh[i]).getId().getHoraInici() + " Hora Final: " + ((RestriccionHoraria) rh[i]).getId().getHoraFin()
 			+ " Dia de la semana: " + ((RestriccionHoraria) rh[i]).getId().getDiaSemana());
 		}
-		pt.borrar(iden);
+		//pt.borrar(iden);
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
 	

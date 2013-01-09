@@ -3,8 +3,11 @@ package procuidado.controlInterfaces;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class FormCuidador {
 	private Map<String, Object> datos = new HashMap<String, Object>();
+	private CommonsMultipartFile fotoCuidador;
 	
 	public void setNombreUsuario(String nombreUsuario) {
 		datos.put("nombreUsuario", nombreUsuario);
@@ -96,5 +99,13 @@ public class FormCuidador {
 	
 	public Map<String, Object> obtenerDatos() {
 		return datos;
+	}
+
+	public CommonsMultipartFile getFotoCuidador() {
+		return fotoCuidador;
+	}
+
+	public void setFotoCuidador(CommonsMultipartFile fotoCuidador) {
+		this.fotoCuidador = fotoCuidador;
 	}
 }
