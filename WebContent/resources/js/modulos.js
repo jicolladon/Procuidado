@@ -88,12 +88,17 @@ procuidado.modulos = procuidado.modulos || {};
             _oBtnEnviar, _oModal, _oVerCondiciones,
             _oMenuItem, _oView, _nIdResidente=1, _putCuidadores,
             _oCuidadoresActuales, 
-            _sCondiciones = "Condiciones bla bla bla",
-            _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
+            _sCondiciones, _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
             _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
             _oConfirmarDatosCuidador, _confirmarDatosCuidador,
             _refrescarCuidadores, _quitarErroresFormulario,
             _putRestricciones, _fotoActualizada;
+        
+        _sCondiciones = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet vehicula felis. Sed luctus porttitor nisi, sit amet varius nisl semper ut. Nam tempor magna turpis. Praesent ornare erat ut augue faucibus congue. Proin elementum iaculis massa, vitae aliquam nisi congue sit amet. Morbi euismod convallis consequat. Vestibulum laoreet, massa sed adipiscing condimentum, diam ligula commodo massa, vel sodales urna purus in nunc. Etiam sit amet elementum arcu. Maecenas a ipsum arcu, a rhoncus eros. In hac habitasse platea dictumst. Fusce eu dui vitae tortor volutpat tempor vel ut nulla. Nullam facilisis mauris eu velit vestibulum ac sodales justo porttitor." +
+        "Aliquam odio justo, tincidunt et dictum eget, semper nec velit. Morbi fringilla lorem in mi mollis eleifend. Etiam in volutpat elit. Donec lobortis dictum massa, egestas suscipit lectus adipiscing in. Vestibulum consequat semper suscipit. Donec vulputate orci eget odio ornare aliquet. Quisque consectetur mattis neque in rhoncus. Praesent libero nibh, lobortis sit amet ultrices vel, vulputate ac lorem."
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat leo sit amet leo fringilla ornare. Aliquam adipiscing mattis lectus eget euismod. Integer hendrerit nibh enim, id scelerisque massa. Nullam pharetra, nunc et elementum hendrerit, diam metus consequat mi, at aliquet nisl eros pulvinar nisi. Sed pellentesque orci et arcu adipiscing id vestibulum quam venenatis. Ut ullamcorper tortor vel ante fermentum convallis. Proin varius nisl in magna sagittis eleifend. Ut eu quam in magna ultrices bibendum. Nam rhoncus, odio vel imperdiet mattis, massa ligula lobortis turpis, sit amet pellentesque turpis nibh eget dolor."
+        "Integer pellentesque dapibus mauris nec sollicitudin. Vivamus eu luctus lacus. Aenean semper orci vel orci ullamcorper et iaculis neque vulputate. Sed id eros sit amet mauris tempus cursus. Suspendisse sed urna eu nulla fermentum consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed consequat orci a dui vestibulum adipiscing. Quisque in mi ut quam egestas aliquet nec id leo. Donec dapibus aliquam sem, vitae fermentum dui bibendum a. Maecenas pretium, risus quis aliquet malesuada, libero felis malesuada mauris, ut dignissim nisi neque vitae nulla. Donec lorem urna, elementum a sollicitudin id, pulvinar nec nibh. Praesent magna nisi, tempus et sollicitudin eget, porta ac lacus. Etiam posuere, diam sagittis dictum fermentum, enim turpis auctor arcu, non molestie leo urna sit amet leo."+
+        "Quisque non tellus nec odio dapibus sodales ac vitae eros. Donec iaculis placerat fermentum. Nam ac neque orci, sed hendrerit risus. Integer dignissim imperdiet volutpat. Donec rutrum placerat vestibulum. Aenean tristique rutrum rhoncus. Proin volutpat convallis vestibulum. Quisque ac varius justo. Sed turpis justo, lacinia molestie venenatis non, pretium at massa. Maecenas condimentum ipsum id tortor fringilla sed eleifend sem iaculis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eros leo, luctus sit amet porta et, interdum ac nisi.";
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -111,7 +116,7 @@ procuidado.modulos = procuidado.modulos || {};
         _verCondiciones = function (oEvt) {
             var oEvent = oEvt || window.event;
             oEvent.preventDefault();
-            mod.modal.open("Condiciones bla bla bla");
+            mod.modal.open(_sCondiciones);
         };
         
         /**
