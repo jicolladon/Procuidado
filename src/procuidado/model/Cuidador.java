@@ -16,6 +16,66 @@ public class Cuidador extends Persona implements java.io.Serializable
 	private String telefono2;
 	private Set residentes = new HashSet(0);
 	private Set casas = new HashSet(0);
+	private String nom;
+	private String cognom;
+	private String tipoDeDocumento;
+	private String documento;
+	/**
+	 * @return the nom
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * @param nom the nom to set
+	 */
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	/**
+	 * @return the cognom
+	 */
+	public String getCognom() {
+		return cognom;
+	}
+
+	/**
+	 * @param cognom the cognom to set
+	 */
+	public void setCognom(String cognom) {
+		this.cognom = cognom;
+	}
+
+	/**
+	 * @return the tipoDeDocumento
+	 */
+	public String getTipoDeDocumento() {
+		return tipoDeDocumento;
+	}
+
+	/**
+	 * @param tipoDeDocumento the tipoDeDocumento to set
+	 */
+	public void setTipoDeDocumento(String tipoDeDocumento) {
+		this.tipoDeDocumento = tipoDeDocumento;
+	}
+
+	/**
+	 * @return the documento
+	 */
+	public String getDocumento() {
+		return documento;
+	}
+
+	/**
+	 * @param documento the documento to set
+	 */
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
 	private Set restricciones = new HashSet(0);
 
 	public Cuidador() {

@@ -61,8 +61,8 @@
             </nav>
             <div id="contenido">
             <article id="residente">
-                <img src="resources/imagenes/residentes/000001.jpg" />
-                <h1>Jose Maria Perez Burrull</h1>
+                <img id="imagenResidenteActual" src="" />
+                <h1 id="nombreYApellidosResidenteActual" ></h1>
             </article>
             <article id="cuidadores" class="seccion off">
                 <header>

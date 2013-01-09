@@ -40,7 +40,7 @@ procuidado.utils = procuidado.utils || {};
 	};
 	
 	utils.dom = (function () {
-		var _addClass, _hasClass, _removeClass, _cssQuery, _serializeForm;
+		var _addClass, _hasClass, _removeClass, _cssQuery, _serializeForm, _installEach;
 		
 		/**
 		 * Devuelve la expresion regular para encontrar una clase css
@@ -89,18 +89,33 @@ procuidado.utils = procuidado.utils || {};
 		 * @param {String} sQuery Consulta css
 		 */
 		_cssQuery = function (oElement, sQuery) {
+			var aResult;
+			
 			if (oElement !== _und_) {
 				if (typeof doc.querySelectorAll === "function"){
 					this.cssQuery = function (oElement, sQuery) {
-						return oElement.querySelectorAll(sQuery);
+						return _installEach(oElement.querySelectorAll(sQuery));
 					};
 				} else {
 					this.cssQuery = function (oElement, sQuery) {
-						return $(oElement).find(sQuery).makeArray();
+						return _installEach($(oElement).find(sQuery).makeArray());
 					};
 				}
 				return this.cssQuery(oElement, sQuery);
 			}
+		};
+		
+		/**
+		 * Añade la funcion each de utils en el elemento
+		 * 
+		 * @param {Object} oElement Elemento al cual se le quiere añadir la funcion
+		 * @return {Object} Elemento con la funcion each añadida (La misma referencia)
+		 */
+		_installEach = function (oElement) {
+			oElement.each = function (fpCallback) {
+				utils.each(this, fpCallback);
+			};
+			return oElement;
 		};
 		
 		/**
@@ -128,7 +143,7 @@ procuidado.utils = procuidado.utils || {};
 		 */
 		_validateForm = function (oForm, oFieldSchema) {
 			var nLength = oForm.length, nIndex = 0, oField,
-				bValido = true, oData = {}, oValue;
+				bValido = true, oData = {}, oValue, bTodoValido = true;
 			for (; nIndex < nLength; nIndex++) {
 				oField = oForm[nIndex];
 				oSchema = oFieldSchema[oForm[nIndex].name];
@@ -143,7 +158,7 @@ procuidado.utils = procuidado.utils || {};
 							}
 							break;
 						case "number":
-							if (isNaN(parseInt(oValue, 10))) {
+							if (isNaN(parseInt(oField.value, 10))) {
 								bValido = false;
 								oData[oField.name] = oSchema.wrongTypeMessage || "Wrong type";
 								
@@ -163,13 +178,16 @@ procuidado.utils = procuidado.utils || {};
 							}
 							break;
 					}
-					if (!bValido) 
+					if (!bValido) {
 						if (typeof oSchema.wrongCallback === "function") oSchema.wrongCallback();
+						bValido = true;
+						bTodoValido = false;
+					}
 				}
 				
 			}
 			
-			oData.valid = bValido;
+			oData.valid = bTodoValido;
 			return oData;
 		};
 		return {

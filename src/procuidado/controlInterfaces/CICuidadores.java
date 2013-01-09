@@ -17,16 +17,7 @@ import procuidado.cuidadores.ControladorCuidadores;
 @Controller
 public class CICuidadores {
  
-    @RequestMapping("/cuidadores")
-    public @ResponseBody List<Map<String, Object> > consultaCuidadores(@RequestParam int idResidente) {
-    	List<Map<String, Object> > res= new ArrayList<Map<String, Object> >();
-    	Map<String, Object> cuidador = new HashMap<String, Object>();
-    	cuidador.put("id", 1);
-        cuidador.put("nombre", "Cristina Ami Garcia");
-        cuidador.put("pathImg", "/resources/imagenes/cuidadores/000001.jpg");
-        res.add(cuidador);
-        return res;
-    }
+    
     
     @RequestMapping("/cuidadores/{idCuidador}")
     public @ResponseBody Map<String, Object> getCuidador(@PathVariable(value="idCuidador") int idCuidador) {
@@ -66,6 +57,13 @@ public class CICuidadores {
     private Map<String, Object> _normalizarDatosCuidador(Map<String, Object> datos) {
     	datos.put("restricciones", _stringARestricciones((String) datos.get("restriccionesCuidador")));
     	return datos;
+    }
+    
+    @RequestMapping("/cuidadores/consultaResidentes/{idCuidador}")
+    public @ResponseBody List<Map<String, Object>> consultaResidentes(@PathVariable(value="idCuidador") int idCuidador) {
+    	List<Map<String, Object> > resultado;
+    	resultado = ControladorCuidadores.getInstance().obtenerResidentesCuidador(idCuidador);
+    	return resultado;
     }
     
     private List< Map<String, Object> > _stringARestricciones(String sRestricciones) {
