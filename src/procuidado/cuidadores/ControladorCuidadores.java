@@ -93,14 +93,17 @@ public class ControladorCuidadores {
 		String telefono = (String) hashMapDatosCuidador.get("numeroTelefonoCuidador");
 		p.setTelefono1(telefono);
 		
+		String username = (String) hashMapDatosCuidador.get("nombreUsuario");
+		p.setNombreUsuario(username);
+		
+		String password = (String) hashMapDatosCuidador.get("contraUsuario");
+		p.setPassword(password);
+		
 		boolean esCuidadorPorDefecto = (Boolean) (
 				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
 				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
 	
-		Set<Residente> residentesCuidador = p.getResidentes();
-		residentesCuidador.add(residente);
-		p.setResidentes(residentesCuidador);
 		session.save(p);
 		
 		iden = p.getIdentificador();
@@ -142,7 +145,61 @@ public class ControladorCuidadores {
 	 * @return hasMap con los datos del cuidador que se acaba de crear
 	 */
 	public void nuevoCuidador (Map<String, Object> hasMapDatosCuidador) {
-		editarCuidador(hasMapDatosCuidador);
+		String idResidenteAsociado = (String) hasMapDatosCuidador.get("idResidente");
+		Residente residente = FactoriaControlDatos
+				.getInstance()
+				.obtenerControladorDatosResidentes()
+				.obtener(Integer.parseInt(idResidenteAsociado));
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Cuidador p = new Cuidador();
+		
+		String nombre = (String) hasMapDatosCuidador.get("nombreCuidador");
+		p.setNombre(nombre);
+		
+		String foto = (String) hasMapDatosCuidador.get("pathImgCuidador");
+		p.setFoto(foto);
+		
+		String apellido = (String) hasMapDatosCuidador.get("apellidosCuidador");
+		p.setApellidos(apellido);
+		
+		String tipoDocumento = (String) hasMapDatosCuidador.get("tipoDocumentoCuidador");
+		p.setTipoDeDocumento(tipoDocumento);
+		
+		String documento = (String) hasMapDatosCuidador.get("numeroDocumentoCuidador");
+		p.setDocumentoId(documento);
+		
+		String telefono = (String) hasMapDatosCuidador.get("numeroTelefonoCuidador");
+		p.setTelefono1(telefono);
+		
+		boolean esCuidadorPorDefecto = (Boolean) (
+				((String) hasMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
+				);
+		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
+	
+		Set<Residente> residentesCuidador = p.getResidentes();
+		residentesCuidador.add(residente);
+		p.setResidentes(residentesCuidador);
+		session.save(p);
+		
+		iden = p.getIdentificador();
+		List<Map<String, Object>> restriccionesCuidador = (List<Map<String, Object>>) hasMapDatosCuidador.get("restriccionesCuidador");
+		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
+		for (Map<String, Object> restriccionHash: restriccionesCuidador) {
+			r.add(new RestriccionHoraria (
+					new RestriccionHorariaId (
+							(String) restriccionHash.get("horaDesde"),
+							(String) restriccionHash.get("dia"),
+							iden,
+							(String) restriccionHash.get("horaHasta")
+					)
+			));
+		}
+		p.setRestricciones(r);
+		session.save(p);
+		session.getTransaction().commit();
 	}
 	/**
 	 * Obtiene los residentes asociados al cuidador
