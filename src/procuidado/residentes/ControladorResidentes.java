@@ -45,11 +45,14 @@ public class ControladorResidentes {
 		 * @return Lista con el nombre y la foto del residente
 		 */
 		public Map<String, Object> obtenerResidente(int idResidente) {
-			Map <String, Object> residente = new HashMap<String, Object>();
-			residente.put("id", 1);
-			residente.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-			residente.put("nombreYApellidos","Joan isaak Collado");
-			return residente;
+			Map <String, Object> residenteHash = new HashMap<String, Object>();
+			Residente  residente = FactoriaControlDatos.getInstance().obtenerControladorDatosResidentes().obtener(idResidente);
+			
+			residenteHash.put("id", residente.getIdentificador());
+			residenteHash.put("pathImg",residente.getFoto());
+			String nombre = residente.getNombre() + residente.getApellidos();
+			residenteHash.put("nombreYApellido", nombre);
+			return residenteHash;
 		}
 		/**
 		 * Asigna un residente a la casa en la que esta viviendo
