@@ -2,14 +2,22 @@ package procuidado.cuidadores;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import org.hibernate.Session;
 
 import procuidado.controlDatos.FactoriaControlDatos;
 import procuidado.model.Cuidador;
+import procuidado.model.HibernateUtil;
+import procuidado.model.PersonaTest;
 import procuidado.model.RestriccionHoraria;
+import procuidado.model.RestriccionHorariaId;
 
 public class ControladorCuidadores {
+	private static int iden;
 	private static ControladorCuidadores instance = null;
 	private ControladorCuidadores(){};
 	
@@ -26,7 +34,7 @@ public class ControladorCuidadores {
 	 */
 	public Map<String, Object> obtenerCuidador(int idCuidador) {
 		Map <String, Object> cuidadorHash = new HashMap<String, Object>();
-		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(19);
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(16);
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
 		cuidadorHash.put("pathImg","/resources/imagenes/cuidadores/000001.jpg");
@@ -47,7 +55,7 @@ public class ControladorCuidadores {
 			restriccion.put("horaFin", ((RestriccionHoraria) rh[i]).getId().getHoraFin());
 			restricciones.add(restriccion);
 		}
-		
+		cuidadorHash.put("restricciones",restricciones);
 		return cuidadorHash;
 	}
 	/**
@@ -55,14 +63,49 @@ public class ControladorCuidadores {
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Cuidador p = new Cuidador();
+		String id = (String) hashMapDatosCuidador.get("identificador");
+		p.setDocumentoId(id);
+		String nombre = (String) hashMapDatosCuidador.get("nombre");
+		p.setNombre(nombre);
+		String apellido = (String) hashMapDatosCuidador.get("apellido");
+		p.setCognom(apellido);
+		String tipoDocumento = (String) hashMapDatosCuidador.get("tipoDocumento");
+		p.setTipoDeDocumento(tipoDocumento);
+		String documento = (String) hashMapDatosCuidador.get("documento");
+		p.setDocumento(documento);
+		String telefono = (String) hashMapDatosCuidador.get("telefono");
+		p.setTelefono1(telefono);
+		boolean esCuidadorPorDefecto = (Boolean) hashMapDatosCuidador.get("esCuidadorPorDefecto");
+		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
+		session.save(p);
 		
+		iden = p.getIdentificador();
+		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("12", "lunes", p.getIdentificador(), "13")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("14", "lunes", p.getIdentificador(), "17")));
+		r.add(new RestriccionHoraria(new RestriccionHorariaId("10", "martes", p.getIdentificador(), "13")));
+		p.setRestricciones(r);
+		session.save(p);
+		session.getTransaction().commit();
 	}
+
 	/**
 	 * Elimina el cuidador con el idCuidador indicado
 	 * @param idCuidador
 	 */
 	public void borrarCuidador(int idCuidador) {
-		
+		Cuidador c = get(idCuidador);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(c);
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().getCurrentSession().close();
+	}
+	private Cuidador get(int id){
+		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(id);
 	}
 	/**
 	 * Se crea un cuidador nuevo con los datos pasados como parametro
