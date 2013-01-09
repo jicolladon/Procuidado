@@ -24,9 +24,9 @@ public class ControlDatosCuidadores implements IControlDatosCuidadores{
 	public Cuidador obtenerPrimerCuidador() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List<Cuidador> cuidadores =  (List<Cuidador>) session.createQuery("from cuidador");
+		List cuidadores =  session.createQuery("from Cuidador").list();
 	    session.getTransaction().commit();
-		return cuidadores.get(0);
+		return (Cuidador) cuidadores.get(0);
 	}
 
 }
