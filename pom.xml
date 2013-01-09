@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--/* Desarrollado por @autor	Encoding: UTF-8 */	-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0   http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.viavansi</groupId>
+	<artifactId>Procuidado</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1</version>
+	<name>Procuidado</name>
+	<url>url</url>
+	<inceptionYear>2008</inceptionYear>
+	<organization>
+		<name>XXXXX</name>
+		<url>XXXXX</url>
+	</organization>
+	<!--
+		**********************************
+		 Dependencias del proyecto
+		**********************************
+	-->
+	<dependencies>
+
+		<!-- Dependencias para test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Dependencias JEE -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.5.11</version>
+	</dependency>
+	<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<exclusions>
+			<exclusion>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>1.7.1</version>
+		<scope>compile</scope>
+		<optional>true</optional>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version>
+		<scope>compile</scope>
+		<optional>true</optional>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.jopt-simple</groupId>
+		<artifactId>jopt-simple</artifactId>
+		<version>3.0</version>
+		<scope>compile</scope>
+		<optional>true</optional>
+	</dependency>
+
+		<!-- Dependencias propias del proyecto-->
+		<!-- Esto es un ejemplo, descomentar y meter las propias del proyecto -->
+		<!--
+		<dependency>
+			<groupId>com.viavansi.motorformularios</groupId>
+			<artifactId>motorformularios_cliente</artifactId>
+			<version>0.0.8</version>
+		</dependency>
+		-->
+
+	</dependencies>
+
+	<!--
+		**********************************
+		 Desarrolladores del proyecto
+		**********************************
+	-->
+	<developers>
+		<!--
+			Ficha de desarrolladores; esta información no es obligatoria. Editar y poner los correctos (si se conocen)
+
+		<developer>
+			<id>jisaac</id>
+			<name>Joan Isaac Collado</name>
+			<email>joan.isaac.collado@gmail.com</email>
+			<roles>
+				<role>Jefe de proyecto</role>
+			</roles>
+			<organization>Fiberis</organization>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>jluis</id>
+			<name>Jose Luis Orta</name>
+			<email>infoluis85@gmail.com</email>
+			<roles>
+				<role>Arquitecto</role>
+			</roles>
+			<organization>Fiberis</organization>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>arebollo</id>
+			<name>Ana rebollo</name>
+			<email>ana.rebollo.pin@gmail.com</email>
+			<roles>
+				<role>Analista</role>
+			</roles>
+			<organization>Fiberis</organization>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>mbaro</id>
+			<name>Marc Baro</name>
+			<email>marcbaro22@gmail.com</email>
+			<roles>
+				<role>Arquitecto</role>
+			</roles>
+			<organization>Fiberis</organization>
+			<timezone>+1</timezone>
+		</developer>	
+		-->
+	</developers>
+
+	<!--
+		**********************************
+		Plugins para la compilación,
+		empaquetado y distribución 
+		**********************************
+	-->
+	<build>
+		<finalName>${profile.finalName}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<wtpversion>1.5</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--
+				Plugins para el despliege remoto automático 
+				en el entorno de preproducción
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource><!-- custom context.xml -->
+							<directory>${directorio.configuracion.context}</directory>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<!-- configuración para el empaquetado del proyecto -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>ISO-8859-1</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--
+		********************************** Dependencias a los repositorios 
+		específicos del proyecto. Nota: Este repositorio asegurara la correcta
+		compilación del proyecto, manteniendo en todo momento las librerías
+		mantenidas. 
+		Indicar uno si la organización dispone de su propio repositorio o alguna
+		de las dependencias lo requiere.**********************************
+	-->
+	<!-- Repositorio de ejemplo, se puede quitar y poner los correctos
+	<repositories>
+		<repository>
+			<id>Viavansi</id>
+			<name>Viavansi Repositorio</name>
+			<url>http://repositorio.viavansi.com/repo</url>
+		</repository>
+	</repositories>
+	-->
+
+
+	<!--
+		********************************** Configuración de los informes y
+		reports del proyecto **********************************
+	-->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<links>
+						<link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+					</links>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
