@@ -50,7 +50,7 @@ public class ControladorResidentes {
 			
 			residenteHash.put("id", residente.getIdentificador());
 			residenteHash.put("pathImg",residente.getFoto());
-			String nombre = residente.getNombre() + residente.getApellidos();
+			String nombre = residente.getNombre() + " " + residente.getApellidos();
 			residenteHash.put("nombreYApellido", nombre);
 			return residenteHash;
 		}

@@ -38,13 +38,12 @@ public class ControladorCuidadores {
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
 		cuidadorHash.put("pathImg",cuidador.getFoto());
-		String nombre = cuidador.getNombre();
-		String nombreApellidos[] = nombre.split(" ");
 		cuidadorHash.put("nombre", cuidador.getNombre());
 		cuidadorHash.put("apellidos", cuidador.getApellidos());
+		cuidadorHash.put("apellidos", cuidador.getTelefono1());
 		cuidadorHash.put("tipoDocumento", "DNI");
 		cuidadorHash.put("numeroDocumento",  cuidador.getDocumentoId());
-		cuidadorHash.put("cuidadorPorDefecto", cuidador.isEsCuidadorPorDefecto());
+		cuidadorHash.put("cuidadorPorDefecto", cuidador.isEsCuidadorPorDefecto() ? "SI" : "NO");
 		
 		List<Map <String, Object> > restricciones = new ArrayList<Map <String, Object>>();
 		
@@ -60,7 +59,7 @@ public class ControladorCuidadores {
 		return cuidadorHash;
 	}
 	/**
-	 * Sustituye los datos por los parametros de la funci�n siempre que se indique  
+	 * Sustituye los datos por los parametros de la funcion siempre que se indique  
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
@@ -113,8 +112,8 @@ public class ControladorCuidadores {
 	 * @param hasMapDatosCuidador datos del cuidador nuevo
 	 * @return hasMap con los datos del cuidador que se acaba de crear
 	 */
-	public Map<String, Object> nuevoCuidador (Map<String, Object> hasMapDatosCuidador) {
-		return new HashMap<String, Object>();
+	public void nuevoCuidador (Map<String, Object> hasMapDatosCuidador) {
+		editarCuidador(hasMapDatosCuidador);
 	}
 	/**
 	 * Obtiene los residentes asociados al cuidador
