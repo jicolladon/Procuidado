@@ -1,6 +1,7 @@
 package procuidado.cuidadores;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,7 @@ import org.hibernate.Session;
 import procuidado.controlDatos.FactoriaControlDatos;
 import procuidado.model.Cuidador;
 import procuidado.model.HibernateUtil;
-import procuidado.model.PersonaTest;
+import procuidado.model.Residente;
 import procuidado.model.RestriccionHoraria;
 import procuidado.model.RestriccionHorariaId;
 
@@ -63,6 +64,7 @@ public class ControladorCuidadores {
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
+		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Cuidador p = new Cuidador();
@@ -81,7 +83,7 @@ public class ControladorCuidadores {
 		boolean esCuidadorPorDefecto = (Boolean) hashMapDatosCuidador.get("esCuidadorPorDefecto");
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
 		session.save(p);
-		
+		// Hacer un get con REstricciones del hasmap casteralo a list map i listo
 		iden = p.getIdentificador();
 		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
 		r.add(new RestriccionHoraria(new RestriccionHorariaId("12", "lunes", p.getIdentificador(), "13")));
@@ -96,16 +98,28 @@ public class ControladorCuidadores {
 	 * Elimina el cuidador con el idCuidador indicado
 	 * @param idCuidador
 	 */
-	public void borrarCuidador(int idCuidador) {
+	public void borrarCuidador(int idCuidador) throws EsElUltimoCuidadorDelResidente {
 		Cuidador c = get(idCuidador);
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		
+		Object[] residenteObject = c.getResidentes().toArray();
+		for(int i = 0; i < residenteObject.length; i++) {
+			Residente r = (Residente) residenteObject[i];
+			String error = "El cuidador no puede eliminarse por ser el ultimo cuidador asignado a uno de lso residentes"; 
+			if (r.getCuidadors().size() == 1) throw new EsElUltimoCuidadorDelResidente(error);
+		}
 		session.delete(c);
 		session.getTransaction().commit();
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
-	private Cuidador get(int id){
-		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(id);
+	/**
+	 * Funcion de ayuda para abstraer de la implementaion de interfaces
+	 * @param idCuidador
+	 * @return cuidador correctamente inicializado con los datos de la BD
+	 */
+	private Cuidador get(int idCuidador){
+		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(idCuidador);
 	}
 	/**
 	 * Se crea un cuidador nuevo con los datos pasados como parametro
