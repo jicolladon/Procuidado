@@ -25,6 +25,14 @@ public class FormCuidador {
 		return (String) datos.get("contraUsuario");
 	}
 	
+	public String getNumeroTelefonoCuidador() {
+		return (String) datos.get("numeroTelefonoCuidador");
+	}
+	
+	public void setNumeroTelefonoCuidador(String numeroTelefonoCuidador) {
+		datos.put("numeroTelefonoCuidador", numeroTelefonoCuidador);
+	}
+	
 	public void setNombreCuidador(String nombreCuidador) {
 		datos.put("nombreCuidador", nombreCuidador);
 	}
@@ -62,7 +70,7 @@ public class FormCuidador {
 	}
 	
 	public String getRestriccionesCuidador() {
-		return (String) datos.get("restriccionesCuidador");
+		return (String)datos.get("restriccionesCuidador");
 	}
 	
 	public void setAceptaCondicionesCuidador(String aceptaCondicionesCuidador) {

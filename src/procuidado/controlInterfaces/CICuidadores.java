@@ -63,7 +63,7 @@ public class CICuidadores {
     }
     
     private Map<String, Object> _normalizarDatosCuidador(Map<String, Object> datos) {
-    	datos.put("restricciones", _stringARestricciones((String) datos.get("restriccionesCuidador")));
+    	datos.put("restriccionesCuidador", _stringARestricciones((String) datos.get("restriccionesCuidador")));
     	if (!datos.containsKey("cuidadorPorDefecto")) {
     		datos.put("cuidadorPorDefecto", "NO");
     	}

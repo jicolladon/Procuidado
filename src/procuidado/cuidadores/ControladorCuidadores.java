@@ -72,7 +72,7 @@ public class ControladorCuidadores {
 		String nombre = (String) hashMapDatosCuidador.get("nombreCuidador");
 		p.setNombre(nombre);
 		String apellido = (String) hashMapDatosCuidador.get("apellidosCuidador");
-		p.setCognom(apellido);
+		p.setApellidos(apellido);
 		String tipoDocumento = (String) hashMapDatosCuidador.get("tipoDocumentoCuidador");
 		p.setTipoDeDocumento(tipoDocumento);
 		String documento = (String) hashMapDatosCuidador.get("numeroDocumentoCuidador");
