@@ -166,4 +166,13 @@ public class ControladorCuidadores {
 	public void asignarCasaCuidador(int idCuidador) {
 		
 	}
+	
+	public Map<String,Object> obtenerPrimerCuidador(){
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtenerPrimerCuidador();
+		Map<String,Object> cuidadorHash = new HashMap<String,Object>();
+		cuidadorHash.put("id", cuidador.getIdentificador());
+		cuidadorHash.put("nombre", cuidador.getNombre() + " " + cuidador.getApellidos());
+		cuidadorHash.put("pathImg", cuidador.getFoto());
+		return cuidadorHash;
+	}
 }

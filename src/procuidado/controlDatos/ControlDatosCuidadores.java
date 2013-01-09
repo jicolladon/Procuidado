@@ -1,5 +1,7 @@
 package procuidado.controlDatos;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import procuidado.controlDatosInterfaces.IControlDatosCuidadores;
@@ -15,6 +17,16 @@ public class ControlDatosCuidadores implements IControlDatosCuidadores{
 		Cuidador cuidador = (Cuidador) session.get(Cuidador.class, id);
 	    session.getTransaction().commit();
 		return cuidador;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Cuidador obtenerPrimerCuidador() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<Cuidador> cuidadores =  (List<Cuidador>) session.createQuery("from cuidador");
+	    session.getTransaction().commit();
+		return cuidadores.get(0);
 	}
 
 }
