@@ -460,7 +460,8 @@ procuidado.modulos = procuidado.modulos || {};
     mod.residentes = (function(){
     	var _init, _obtenerResidentes, _nIdCuidador = 1, _putResidentes, _seleccionarResidenteActual, 
     		_nIdResidenteActual, _idResidenteActual, _initDOMVars, _initEvents, _oResidentesListados,
-    		_accionSeleccionarResidente, _obtenerResidenteActual;
+    		_accionSeleccionarResidente, _obtenerResidenteActual,
+    		_obtenerCuidadorYResidentes;
     	
     	/**
     	 * Accion que se lleva a cabo al seleccionar un residente
@@ -570,6 +571,22 @@ procuidado.modulos = procuidado.modulos || {};
     	};
     	
     	/**
+    	 * Obtener primer cuidador del server y sus residentes
+    	 */
+    	_obtenerCuidadorYResidentes = function () {
+    		utils.ajax("/cuidadores/primero", {
+    			success : function (oData) {
+    				_nIdCuidador = oData.id;
+    				_obtenerResidentes();
+    			},
+    			error : function (oData) {
+    				alert("Error al obtener usuario");
+    				console.dir(oData);
+    			}
+    		});
+    	}
+    	
+    	/**
     	 * Obtener la id del residente actual
     	 * 
     	 * @return {Number} Id del residente actual
@@ -581,7 +598,7 @@ procuidado.modulos = procuidado.modulos || {};
     	_init = function () {
     		_initDOMVars();
     		_initEvents();
-    		_obtenerResidentes();
+    		_obtenerCuidadorYResidentes();
     	};
     	return {
     		init : _init,

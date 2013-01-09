@@ -34,7 +34,7 @@
 	        <property name="telefono2" type="string">
 	            <column name="telefono2" length="50" />
 	        </property>
-	        <set name="residentes" table="CuidadorResidente" cascade="save-update,delete-orphan" inverse="false" lazy="true" fetch="select">
+	        <set name="residentes" table="cuidadorresidente" cascade="save-update,delete-orphan" inverse="false" lazy="false" fetch="select">
 	            <key>
 	                <column name="identificadorCuidador" not-null="true" />
 	            </key>
@@ -63,7 +63,7 @@
 	        <many-to-one name="casa" class="procuidado.model.Casa" fetch="select">
 	            <column name="identificadorCasa" />
 	        </many-to-one>
-	        <set name="cuidadors" table="cuidadorresidente" inverse="false" lazy="true" fetch="select">
+	        <set name="cuidadors" table="cuidadorresidente" inverse="false" lazy="false" fetch="select">
 	            <key>
 	                <column name="identificadorresidente" not-null="true" />
 	            </key>

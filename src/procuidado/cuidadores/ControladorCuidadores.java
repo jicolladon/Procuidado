@@ -34,22 +34,23 @@ public class ControladorCuidadores {
 	 */
 	public Map<String, Object> obtenerCuidador(int idCuidador) {
 		Map <String, Object> cuidadorHash = new HashMap<String, Object>();
-		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(19);
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(idCuidador);
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
-		cuidadorHash.put("pathImg","/resources/imagenes/cuidadores/000001.jpg");
+		cuidadorHash.put("pathImg",cuidador.getFoto());
 		String nombre = cuidador.getNombre();
 		String nombreApellidos[] = nombre.split(" ");
-		cuidadorHash.put("nombre", nombreApellidos[0]);
-		cuidadorHash.put("apellidos", nombreApellidos [1] + " " + nombreApellidos[2]);
+		cuidadorHash.put("nombre", cuidador.getNombre());
+		cuidadorHash.put("apellidos", cuidador.getApellidos());
 		cuidadorHash.put("tipoDocumento", "DNI");
 		cuidadorHash.put("numeroDocumento",  cuidador.getDocumentoId());
 		cuidadorHash.put("cuidadorPorDefecto", cuidador.isEsCuidadorPorDefecto());
 		
 		List<Map <String, Object> > restricciones = new ArrayList<Map <String, Object>>();
-		Map <String, Object> restriccion = new HashMap<String, Object>();
+		
 		Object[] rh = cuidador.getRestricciones().toArray();
 		for(int i = 0; i < rh.length; i++){
+			Map <String, Object> restriccion = new HashMap<String, Object>();
 			restriccion.put("diaSemana", ((RestriccionHoraria) rh[i]).getId().getDiaSemana());
 			restriccion.put("horaInicio", ((RestriccionHoraria) rh[i]).getId().getHoraInici());
 			restriccion.put("horaFin", ((RestriccionHoraria) rh[i]).getId().getHoraFin());
