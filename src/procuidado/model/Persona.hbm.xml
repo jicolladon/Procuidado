@@ -37,7 +37,7 @@
 	        <property name="telefono2" type="string">
 	            <column name="telefono2" length="50" />
 	        </property>
-	        <set name="residentes" table="cuidadorresidente" cascade="save-update,delete-orphan" inverse="false" lazy="false" fetch="select">
+	        <set name="residentes" table="cuidadorresidente" cascade="save-update" inverse="false" lazy="false" fetch="select">
 	            <key>
 	                <column name="identificadorCuidador" not-null="true" />
 	            </key>
