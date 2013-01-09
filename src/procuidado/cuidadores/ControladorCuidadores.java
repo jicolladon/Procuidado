@@ -78,7 +78,9 @@ public class ControladorCuidadores {
 		p.setDocumento(documento);
 		String telefono = (String) hashMapDatosCuidador.get("telefono");
 		p.setTelefono1(telefono);
-		boolean esCuidadorPorDefecto = (Boolean) hashMapDatosCuidador.get("esCuidadorPorDefecto");
+		boolean esCuidadorPorDefecto = (Boolean) (
+				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
+				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
 		session.save(p);
 		

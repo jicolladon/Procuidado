@@ -32,11 +32,6 @@ public class CIResidentes {
 	
 	@RequestMapping("/residentes/{idResidente}")
 	public @ResponseBody Map<String, Object> obtenerResidente(@PathVariable(value="idResidente") int idResidente) {
-		//return ControladorResidentes.getInstance().obtenerResidente(idResidente);
-		Map <String, Object> residente = new HashMap<String, Object>();
-		residente.put("id", 2);
-		residente.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente.put("nombreYApellido","Otro Residente");
-		return residente;
+		return ControladorResidentes.getInstance().obtenerResidente(idResidente);
 	}
 }

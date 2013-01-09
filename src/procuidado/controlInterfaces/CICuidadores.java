@@ -35,25 +35,26 @@ public class CICuidadores {
     }
     
     @RequestMapping("/cuidadores/nuevo")
-    public @ResponseBody Map<String, Object> nuevoCuidador(@ModelAttribute FormCuidador formulario) {
+    public @ResponseBody String nuevoCuidador(@ModelAttribute FormCuidador formulario) {
     	Map<String, Object> datosForm = formulario.obtenerDatos();
-    	Map<String, Object> resultado = ControladorCuidadores
+    	ControladorCuidadores
     			.getInstance()
     			.nuevoCuidador(
     					_normalizarDatosCuidador(datosForm)
     					);
     	
-    	return resultado;
+    	return "";
     }
     
     @RequestMapping("/cuidadores/editar")
-    public @ResponseBody void editarCuidador(@ModelAttribute FormCuidador formulario) {
+    public @ResponseBody String editarCuidador(@ModelAttribute FormCuidador formulario) {
     	Map<String, Object> datosForm = formulario.obtenerDatos();
     	ControladorCuidadores
     			.getInstance()
     			.editarCuidador(
     					_normalizarDatosCuidador(datosForm)
     					);
+    	return "";
     }
     
     @RequestMapping("/cuidadores/borrar/{idCuidador}")
@@ -63,6 +64,9 @@ public class CICuidadores {
     
     private Map<String, Object> _normalizarDatosCuidador(Map<String, Object> datos) {
     	datos.put("restricciones", _stringARestricciones((String) datos.get("restriccionesCuidador")));
+    	if (!datos.containsKey("cuidadorPorDefecto")) {
+    		datos.put("cuidadorPorDefecto", "NO");
+    	}
     	return datos;
     }
     
