@@ -67,8 +67,7 @@ public class ControladorCuidadores {
 		session.beginTransaction();
 		
 		Cuidador p = new Cuidador();
-		String id = (String) hashMapDatosCuidador.get("identificadorCuidador");
-		p.setDocumentoId(id);
+		
 		String nombre = (String) hashMapDatosCuidador.get("nombreCuidador");
 		p.setNombre(nombre);
 		
@@ -77,26 +76,31 @@ public class ControladorCuidadores {
 		
 		String apellido = (String) hashMapDatosCuidador.get("apellidosCuidador");
 		p.setApellidos(apellido);
+		
 		String tipoDocumento = (String) hashMapDatosCuidador.get("tipoDocumentoCuidador");
 		p.setTipoDeDocumento(tipoDocumento);
+		
 		String documento = (String) hashMapDatosCuidador.get("numeroDocumentoCuidador");
 		p.setDocumentoId(documento);
+		
 		String telefono = (String) hashMapDatosCuidador.get("numeroTelefonoCuidador");
 		p.setTelefono1(telefono);
+		
 		boolean esCuidadorPorDefecto = (Boolean) (
 				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
 				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
+		
 		String idResidenteAsociado = (String) hashMapDatosCuidador.get("idResidente");
 		Residente residente = FactoriaControlDatos
 				.getInstance()
 				.obtenerControladorDatosResidentes()
 				.obtener(Integer.parseInt(idResidenteAsociado));
+		Set<Residente> residentesCuidador = p.getResidentes();
+		residentesCuidador.add(residente);
+		p.setResidentes(residentesCuidador);
 		session.save(p);
-		Set<Cuidador> cuidadoresResidenteAsociado = new HashSet<Cuidador>();
-		cuidadoresResidenteAsociado.add(p);
-		residente.setCuidadors(cuidadoresResidenteAsociado);
-		session.save(residente);
+		
 		iden = p.getIdentificador();
 		List<Map<String, Object>> restriccionesCuidador = (List<Map<String, Object>>) hashMapDatosCuidador.get("restriccionesCuidador");
 		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
