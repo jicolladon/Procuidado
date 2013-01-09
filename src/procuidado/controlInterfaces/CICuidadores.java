@@ -116,7 +116,7 @@ public class CICuidadores {
     
     private List< Map<String, Object> > _stringARestricciones(String sRestricciones) {
     	List< Map<String, Object> > resultado = new ArrayList< Map<String, Object> >();
-    	String[] lineas = sRestricciones.split("\n\r");
+    	String[] lineas = sRestricciones.split("\\r\\n");
     	for (String linea : lineas) {
     		if (!linea.equals("")) {
     			Map<String, Object> restriccion = new HashMap<String, Object>();

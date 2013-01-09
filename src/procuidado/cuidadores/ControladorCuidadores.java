@@ -40,7 +40,7 @@ public class ControladorCuidadores {
 		cuidadorHash.put("pathImg",cuidador.getFoto());
 		cuidadorHash.put("nombre", cuidador.getNombre());
 		cuidadorHash.put("apellidos", cuidador.getApellidos());
-		cuidadorHash.put("apellidos", cuidador.getTelefono1());
+		cuidadorHash.put("numeroTelefono", cuidador.getTelefono1());
 		cuidadorHash.put("tipoDocumento", "DNI");
 		cuidadorHash.put("numeroDocumento",  cuidador.getDocumentoId());
 		cuidadorHash.put("cuidadorPorDefecto", cuidador.isEsCuidadorPorDefecto() ? "SI" : "NO");
@@ -79,7 +79,7 @@ public class ControladorCuidadores {
 		p.setNombre(nombre);
 		
 		String foto = (String) hashMapDatosCuidador.get("pathImgCuidador");
-		p.setNombre(foto);
+		p.setFoto(foto);
 		
 		String apellido = (String) hashMapDatosCuidador.get("apellidosCuidador");
 		p.setApellidos(apellido);
@@ -116,6 +116,7 @@ public class ControladorCuidadores {
 					)
 			));
 		}
+		p.setRestricciones(r);
 		session.save(p);
 		session.getTransaction().commit();
 	}
