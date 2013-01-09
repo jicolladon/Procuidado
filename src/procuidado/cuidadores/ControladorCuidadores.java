@@ -1,7 +1,6 @@
 package procuidado.cuidadores;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +34,7 @@ public class ControladorCuidadores {
 	 */
 	public Map<String, Object> obtenerCuidador(int idCuidador) {
 		Map <String, Object> cuidadorHash = new HashMap<String, Object>();
-		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(16);
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(19);
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
 		cuidadorHash.put("pathImg","/resources/imagenes/cuidadores/000001.jpg");
@@ -60,11 +59,10 @@ public class ControladorCuidadores {
 		return cuidadorHash;
 	}
 	/**
-	 * Sustituye los datos por los parametros de la funci—n siempre que se indique  
+	 * Sustituye los datos por los parametros de la funciï¿½n siempre que se indique  
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
-		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Cuidador p = new Cuidador();
@@ -83,7 +81,7 @@ public class ControladorCuidadores {
 		boolean esCuidadorPorDefecto = (Boolean) hashMapDatosCuidador.get("esCuidadorPorDefecto");
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
 		session.save(p);
-		// Hacer un get con REstricciones del hasmap casteralo a list map i listo
+		
 		iden = p.getIdentificador();
 		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
 		r.add(new RestriccionHoraria(new RestriccionHorariaId("12", "lunes", p.getIdentificador(), "13")));
@@ -98,28 +96,16 @@ public class ControladorCuidadores {
 	 * Elimina el cuidador con el idCuidador indicado
 	 * @param idCuidador
 	 */
-	public void borrarCuidador(int idCuidador) throws EsElUltimoCuidadorDelResidente {
+	public void borrarCuidador(int idCuidador) {
 		Cuidador c = get(idCuidador);
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		
-		Object[] residenteObject = c.getResidentes().toArray();
-		for(int i = 0; i < residenteObject.length; i++) {
-			Residente r = (Residente) residenteObject[i];
-			String error = "El cuidador no puede eliminarse por ser el ultimo cuidador asignado a uno de lso residentes"; 
-			if (r.getCuidadors().size() == 1) throw new EsElUltimoCuidadorDelResidente(error);
-		}
 		session.delete(c);
 		session.getTransaction().commit();
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
 	}
-	/**
-	 * Funcion de ayuda para abstraer de la implementaion de interfaces
-	 * @param idCuidador
-	 * @return cuidador correctamente inicializado con los datos de la BD
-	 */
-	private Cuidador get(int idCuidador){
-		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(idCuidador);
+	private Cuidador get(int id){
+		return FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(id);
 	}
 	/**
 	 * Se crea un cuidador nuevo con los datos pasados como parametro
@@ -135,21 +121,17 @@ public class ControladorCuidadores {
 	 * @return Devuelve una lista de residentes asignados a un cuidador
 	 */
 	public List< Map<String, Object> > obtenerResidentesCuidador(int idCuidador) {
-		Map <String, Object> residente = new HashMap<String, Object>();
-		List<Map <String, Object> > residentes = new ArrayList<Map <String, Object>>();
-		residente.put("id", 1);
-		residente.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente.put("nombreYApellido","Joan isaak Collado");
-		
-		Map <String, Object> residente2 = new HashMap<String, Object>();
-		residente2.put("id", 1);
-		residente2.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente2.put("nombreYApellido","Marc Bar—");
-		
-		residentes.add(residente);
-		residentes.add(residente2);
-		
-		return residentes;
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(idCuidador);
+		Set<Residente> residentes = cuidador.getResidentes();
+		List<Map <String, Object> > residentesHash = new ArrayList<Map <String, Object>>();
+		for(Residente residente : residentes){
+			Map <String, Object> residenteHash = new HashMap<String, Object>();
+			residenteHash.put("id", residente.getIdentificador());
+			residenteHash.put("pathImg",residente.getFoto());
+			residenteHash.put("nombreYApellido",residente.getNombre() + " " + residente.getApellidos());
+			residentesHash.add(residenteHash);
+		}		
+		return residentesHash;
 	}
 	/**
 	 * Obtiene la casa asociadas al cuidador indicado 
@@ -180,5 +162,14 @@ public class ControladorCuidadores {
 	 */
 	public void asignarCasaCuidador(int idCuidador) {
 		
+	}
+	
+	public Map<String,Object> obtenerPrimerCuidador(){
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtenerPrimerCuidador();
+		Map<String,Object> cuidadorHash = new HashMap<String,Object>();
+		cuidadorHash.put("id", cuidador.getIdentificador());
+		cuidadorHash.put("nombre", cuidador.getNombre() + " " + cuidador.getApellidos());
+		cuidadorHash.put("pathImg", cuidador.getFoto());
+		return cuidadorHash;
 	}
 }

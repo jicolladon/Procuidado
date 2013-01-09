@@ -91,7 +91,8 @@ procuidado.modulos = procuidado.modulos || {};
             _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
             _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
             _oConfirmarDatosCuidador, _confirmarDatosCuidador,
-            _refrescarCuidadores, _quitarErroresFormulario;
+            _refrescarCuidadores, _quitarErroresFormulario,
+            _putRestricciones;
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -249,7 +250,27 @@ procuidado.modulos = procuidado.modulos || {};
         	_oFormCuidador.cuidadorPorDefecto.checked = oCuidador.cuidadorPorDefecto === "SI";
         	_oFotoCuidador.src = oCuidador.pathImg || "";
         	_oFormCuidador.idCuidador.value = oCuidador.id;
+        	_putRestricciones(oCuidador.restricciones);
         	mod.principal.mostrar(_oFotoCuidador);
+        };
+        
+        /**
+         * Introduce las restricciones en el elemento del DOM correspondiente
+         * 
+         * @param {Array} aRestricciones Array de restricciones
+         */
+        _putRestricciones = function (aRestricciones) {
+        	var nLength = aRestricciones.length, nIndex = 0,
+        		oElemento = doc.getElementById("restriccionesCuidador"),
+        		sTexto = "", oRestriccion;
+        	for (; nIndex < nLength; nIndex++) {
+        		oRestriccion = aRestricciones[nIndex],
+        		sTexto += oRestriccion.diaSemana + " de ";
+        		sTexto += oRestriccion.horaInicio + " a ";
+        		sTexto += oRestriccion.horaFin;
+        		sTexto += "\n";
+        	}
+        	oElemento.value = sTexto;
         };
         
         /**

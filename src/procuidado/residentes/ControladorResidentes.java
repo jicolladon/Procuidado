@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import procuidado.controlDatos.FactoriaControlDatos;
+import procuidado.model.Cuidador;
+import procuidado.model.Residente;
 
 public class ControladorResidentes {
 		private static ControladorResidentes instance = null;
@@ -22,6 +27,15 @@ public class ControladorResidentes {
 		 */
 		public List< Map<String, Object> > obtenerCuidadoresResidente(int idResidente) {
 			List<Map <String, Object> > resultado = new ArrayList<Map <String, Object>>();
+			Residente residente = FactoriaControlDatos.getInstance().obtenerControladorDatosResidentes().obtener(idResidente);
+			Set<Cuidador> cuidadores = residente.getCuidadors();
+			for (Cuidador cuidador : cuidadores) {
+				Map <String, Object> cuidadorHash = new HashMap<String,Object>();
+				cuidadorHash.put("id", cuidador.getIdentificador());
+				cuidadorHash.put("nombre", cuidador.getNombre() + " " + cuidador.getApellidos());
+				cuidadorHash.put("pathImg", cuidador.getFoto());
+				resultado.add(cuidadorHash);
+			}
 			return resultado;
 		}
 		/**

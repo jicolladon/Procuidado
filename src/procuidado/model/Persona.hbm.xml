@@ -11,11 +11,17 @@
         <property name="nombre" type="string">
             <column name="nombre" length="100" not-null="true" />
         </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="100" not-null="true" />
+        </property>
         <property name="documentoId" type="string">
             <column name="documentoId" length="100" />
         </property>
         <property name="password" type="string">
             <column name="password" />
+        </property>
+        <property name="foto" type="string">
+            <column name="foto" />
         </property>
         <joined-subclass name="procuidado.model.Cuidador" table="cuidador" catalog="procuidado">
         	<key column="identificador"/>
@@ -62,7 +68,7 @@
 	                <column name="identificadorresidente" not-null="true" />
 	            </key>
 	            <many-to-many entity-name="procuidado.model.Cuidador">
-	                <column name="identificadorruidador" not-null="true" />
+	                <column name="identificadorcuidador" not-null="true" />
 	            </many-to-many>
 	        </set>
         </joined-subclass>

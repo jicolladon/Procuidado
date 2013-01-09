@@ -10,8 +10,10 @@ public class Persona implements java.io.Serializable
 
 	private int identificador;
 	private String nombre;
+	private String apellidos;
 	private String documentoId;
 	private String password;
+	private String foto;
 
 	public Persona()
 	{
@@ -69,6 +71,24 @@ public class Persona implements java.io.Serializable
 	public void setPassword(String password)
 	{
 		this.password = password;
+	}
+	
+	public String getFoto()
+	{
+		return this.foto;
+	}
+
+	public void setFoto(String foto)
+	{
+		this.foto = foto;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
 }
