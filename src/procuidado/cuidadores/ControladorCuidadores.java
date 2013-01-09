@@ -63,12 +63,14 @@ public class ControladorCuidadores {
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
 		String idResidenteAsociado = (String) hashMapDatosCuidador.get("idResidente");
 		Residente residente = FactoriaControlDatos
 				.getInstance()
 				.obtenerControladorDatosResidentes()
 				.obtener(Integer.parseInt(idResidenteAsociado));
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
 		Cuidador p = new Cuidador();

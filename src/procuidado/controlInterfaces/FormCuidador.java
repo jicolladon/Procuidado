@@ -17,6 +17,15 @@ public class FormCuidador {
 		return (String) datos.get("nombreUsuario");
 	}
 	
+	
+	public void setPathImgCuidador(String pathImgCuidador) {
+		datos.put("pathImgCuidador", pathImgCuidador);
+	}
+	
+	public String getPathImgCuidador() {
+		return (String) datos.get("pathImgCuidador");
+	}
+	
 	public void setContraUsuario(String contraUsuario) {
 		datos.put("contraUsuario", contraUsuario);
 	}
@@ -85,23 +94,23 @@ public class FormCuidador {
 		datos.put("cuidadorPorDefecto", cuidadorPorDefecto);
 	}
 	
-	public String getcuidadorPorDefecto () {
+	public String getCuidadorPorDefecto () {
 		return (String) datos.get("cuidadorPorDefecto");
 	}
 	
-	public Integer getIdCuidador() {
-		return (Integer) datos.get("idCuidador");
+	public String getIdCuidador() {
+		return (String) datos.get("idCuidador");
 	}
 	
-	public void setIdCuidador(Integer identificador) {
+	public void setIdCuidador(String identificador) {
 		datos.put("idCuidador", identificador);
 	}
 	
-	public Integer getIdResidente() {
-		return (Integer) datos.get("idResidente");
+	public String getIdResidente() {
+		return (String) datos.get("idResidente");
 	}
 	
-	public void setIdResidente(Integer identificador) {
+	public void setIdResidente(String identificador) {
 		datos.put("idResidente", identificador);
 	}
 	
