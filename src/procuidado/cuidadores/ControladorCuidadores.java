@@ -47,7 +47,7 @@ public class ControladorCuidadores {
 			restriccion.put("horaFin", ((RestriccionHoraria) rh[i]).getId().getHoraFin());
 			restricciones.add(restriccion);
 		}
-		
+		cuidadorHash.put("restricciones", restricciones);		
 		return cuidadorHash;
 	}
 	/**
