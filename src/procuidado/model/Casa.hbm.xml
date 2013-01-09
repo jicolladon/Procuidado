@@ -6,7 +6,7 @@
     <class name="procuidado.model.Casa" table="casa" catalog="procuidado">
         <id name="identificador" type="int">
             <column name="identificador" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="cuidador" class="procuidado.model.Cuidador" fetch="select">
             <column name="identificadorAdministrador" not-null="true" unique="true" />

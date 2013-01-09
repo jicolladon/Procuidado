@@ -20,6 +20,8 @@ public class Cuidador extends Persona implements java.io.Serializable
 	private String cognom;
 	private String tipoDeDocumento;
 	private String documento;
+	private Set restricciones = new HashSet(0);
+	
 	/**
 	 * @return the nom
 	 */
@@ -75,8 +77,6 @@ public class Cuidador extends Persona implements java.io.Serializable
 	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
-
-	private Set restricciones = new HashSet(0);
 
 	public Cuidador() {
 	}
