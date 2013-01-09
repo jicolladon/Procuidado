@@ -15,11 +15,12 @@ public class ControladorResidentes {
 		private ControladorResidentes(){};
 		
 		public static ControladorResidentes getInstance() {
-			if (instance != null) {
+			if (instance == null) {
 				instance = new ControladorResidentes();
 			}
 			return instance;
 		}
+		
 		/**
 		 * Dado el residente devuelve los datos de sus cuidadores
 		 * @param idResidente identifica al residente  

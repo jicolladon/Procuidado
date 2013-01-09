@@ -82,6 +82,11 @@ public class CICuidadores {
     	out.addObject("jsCallback", jsCallback);
     	return out;
     }
+   
+    @RequestMapping(value="/cuidadores/primero")
+    public @ResponseBody Map<String, Object> obtenerPrimerCuidador() {
+    	return ControladorCuidadores.getInstance().obtenerPrimerCuidador();
+    }
     
     private String grabarFicheroALocal(FormCuidador form) throws Exception {
         /*CommonsMultipartFile uploaded = form.getFotoCuidador();

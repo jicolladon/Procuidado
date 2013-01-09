@@ -20,13 +20,14 @@ public class CIResidentes {
 
 	@RequestMapping("/residentes/consultaCuidadores/{idResidente}")
 	public @ResponseBody List<Map<String, Object> > consultaCuidadores(@PathVariable(value="idResidente") int idResidente) {
-	    	List<Map<String, Object> > res= new ArrayList<Map<String, Object> >();
-	    	Map<String, Object> cuidador = new HashMap<String, Object>();
+	    	List<Map<String, Object> > resultado= new ArrayList<Map<String, Object> >();
+	    	/*Map<String, Object> cuidador = new HashMap<String, Object>();
 	    	cuidador.put("id", 1);
 	        cuidador.put("nombre", "Cristina Ami Garcia");
 	        cuidador.put("pathImg", "/resources/imagenes/cuidadores/000001.jpg");
-	        res.add(cuidador);
-	        return res;
+	        res.add(cuidador);*/
+	        resultado = ControladorResidentes.getInstance().obtenerCuidadoresResidente(idResidente);
+	        return resultado;
 	}
 	
 	@RequestMapping("/residentes/{idResidente}")
