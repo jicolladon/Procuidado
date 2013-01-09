@@ -64,6 +64,11 @@ public class ControladorCuidadores {
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		String idResidenteAsociado = (String) hashMapDatosCuidador.get("idResidente");
+		Residente residente = FactoriaControlDatos
+				.getInstance()
+				.obtenerControladorDatosResidentes()
+				.obtener(Integer.parseInt(idResidenteAsociado));
 		session.beginTransaction();
 		
 		Cuidador p = new Cuidador();
@@ -90,12 +95,7 @@ public class ControladorCuidadores {
 				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
 				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
-		
-		String idResidenteAsociado = (String) hashMapDatosCuidador.get("idResidente");
-		Residente residente = FactoriaControlDatos
-				.getInstance()
-				.obtenerControladorDatosResidentes()
-				.obtener(Integer.parseInt(idResidenteAsociado));
+	
 		Set<Residente> residentesCuidador = p.getResidentes();
 		residentesCuidador.add(residente);
 		p.setResidentes(residentesCuidador);
