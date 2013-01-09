@@ -15,15 +15,25 @@ public class PersonaTest {
 	 */
 	public static void main(String[] args) {
 		PersonaTest pt = new PersonaTest();
-		//pt.createStore();
-		Cuidador c = pt.get(19);
+		pt.createStore();
+		Cuidador c = pt.get(iden);
 		System.out.println("Telf: " + c.getTelefono1() + " Nombre: " + c.getNombre());
 		for(int i = 0; i < c.getRestricciones().size(); i++){
 			Object[] rh = c.getRestricciones().toArray();
 			System.out.println("Hora de inicio: " + ((RestriccionHoraria) rh[i]).getId().getHoraInici() + " Hora Final: " + ((RestriccionHoraria) rh[i]).getId().getHoraFin()
 			+ " Dia de la semana: " + ((RestriccionHoraria) rh[i]).getId().getDiaSemana());
 		}
+		pt.borrar(iden);
 		HibernateUtil.getSessionFactory().getCurrentSession().close();
+	}
+	
+	private void borrar(int id)
+	{
+		Cuidador c = get(id);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(c);
+		session.getTransaction().commit();
 	}
 	
 	private void createStore(){
@@ -31,7 +41,7 @@ public class PersonaTest {
 		session.beginTransaction();
 		Cuidador p = new Cuidador();
 		p.setDocumentoId("1234");
-		p.setNombre("Test Testington XVI");
+		p.setNombre("Test Testington XXI");
 		p.setPassword("myPass");
 		p.setTelefono1("111222333");
 		session.save(p);

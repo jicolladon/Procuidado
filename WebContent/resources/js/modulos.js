@@ -128,7 +128,7 @@ procuidado.modulos = procuidado.modulos || {};
          * Pide los cuidadores al servidor y los actualiza
          */
         _refrescarCuidadores = function () {
-        	utils.ajax("/cuidadores?idResidente=" + _nIdResidente, {
+        	utils.ajax("/residentes/consultaCuidadores/" + mod.residentes.idResidenteActual(), {
         		success : _putCuidadores,
         		error : function (oData) {
         			alert("Se ha producido un error");
@@ -207,7 +207,7 @@ procuidado.modulos = procuidado.modulos || {};
         		_quitarErroresFormulario();
         		utils.dom.removeClass(_oDatosCuidador, "off");
         		_oFormCuidador.reset();
-        		_oFormCuidador.idResidente.value = _nIdResidente;
+        		_oFormCuidador.idResidente.value = mod.residentes.idResidenteActual();
         		_oTituloDatosCuidador.innerText = "Nuevo cuidador";
         		utils.dom.removeClass(doc.getElementById("datosLoginCuidador"), "off");
         		utils.dom.addClass(doc.getElementById("datosLoginCuidador"), "on");
@@ -314,6 +314,15 @@ procuidado.modulos = procuidado.modulos || {};
         				mod.principal.mostrar(oElemento);
         			}
         		},
+        		"numeroTelefonoCuidador" : {
+        			type : "number",
+        			empty : false,
+        			wrongCallback : function () {
+        				var oElemento = doc.getElementById("numeroTelefonoCuidadorError");
+        				oElemento.innerText = "El campo no puede ser vacio y ha de ser un numero";
+        				mod.principal.mostrar(oElemento);
+        			}
+        		},
         		"pathImgCuidador" : {
         			type : "string",
         			empty : false,
@@ -359,7 +368,7 @@ procuidado.modulos = procuidado.modulos || {};
          * Oculta los errores en el formulario
          */
         _quitarErroresFormulario = function () {
-        	utils.each (utils.dom.cssQuery(doc, ".errorCampo"), function () {
+        	utils.dom.cssQuery(doc, ".errorCampo").each(function () {
         		mod.principal.ocultar(this);
         	});
         };
@@ -428,13 +437,134 @@ procuidado.modulos = procuidado.modulos || {};
     };
     
     mod.residentes = (function(){
-    	var _init;
+    	var _init, _obtenerResidentes, _nIdCuidador = 1, _putResidentes, _seleccionarResidenteActual, 
+    		_nIdResidenteActual, _idResidenteActual, _initDOMVars, _initEvents, _oResidentesListados,
+    		_accionSeleccionarResidente, _obtenerResidenteActual;
+    	
+    	/**
+    	 * Accion que se lleva a cabo al seleccionar un residente
+    	 */
+    	_accionSeleccionarResidente = function (oEvent) {
+    		var oTarget, oParent, nIdResidente, sClassLink;
+        	oEvent = oEvent || window.event;
+        	oEvent.preventDefault();
+        	oTarget = oEvent.target || oEvent.srcElement;
+        	oParent = oTarget;
+        	//Buscamos el padre <li>
+        	while (oParent.nodeName !== "LI") {
+        		oParent = oParent.parentNode;
+        	}
+        	nIdResidente = oParent.id;
+        	if (nIdResidente !== _und_) {
+        		nIdResidente = nIdResidente.replace("id-", "");
+        		_obtenerResidenteActual(nIdResidente);
+        	}
+    	};
+    	
+    	/**
+    	 * Obtiene un residente del servidor y lo selecciona como residente actual
+    	 */
+    	_obtenerResidenteActual = function (nIdResidente) {
+    		utils.ajax("/residentes/" + nIdResidente, {
+    			success : function (oData) { 
+    				_seleccionarResidenteActual(oData);
+    			},
+    			error : function (oData) {
+    				alert("Se ha producido un error");
+    				console.dir(oData);
+    			}
+    		});
+    	};
+    	
+    	/**
+         * Inicializa las variables del DOM
+         */
+        _initDOMVars = function () {
+        	_oResidentesListados = doc.getElementById("residentesItems");
+        };
+        
+        /**
+         * Inicializa los eventos
+         */
+        _initEvents = function () {
+        	utils.events.addEvent(_oResidentesListados, "click", _accionSeleccionarResidente);
+        };
+        
+    	/**
+    	 * Introduce los residentes en el DOM
+    	 * 
+    	 * @param {Array} aData Array con los datos de los residentes
+    	 * @param {Boolean} Si es true, tambien se sustituye el residente actual
+    	 */
+    	_putResidentes = function (aData, bSustituirActual) {
+    		var oListaResidentes = _oResidentesListados, sHTML = "",
+    			nLength = aData.length, nIndex = 0, oResidente;
+    		sHTML += "<ul>";
+    		for (; nIndex < nLength; nIndex++) {
+    			oResidente = aData[nIndex];
+    			sHTML += "<li id=\"id-" + oResidente.id + "\">";
+    			sHTML += "<a href=\"#\">";
+    			sHTML += "<img alt=\"" + oResidente.nombreYApellido + "\" title=\"" + oResidente.nombreYApellido + "\" src=\"" + oResidente.pathImg + "\" />";
+    			sHTML += "</a>";
+    			sHTML += "</li>";
+    		}
+    		sHTML += "</ul>";
+    		oListaResidentes.innerHTML = sHTML;
+    		if (bSustituirActual) {
+    			if (aData[0] !== _und_) {
+    				_seleccionarResidenteActual(aData[0]);
+    			}
+    		}
+    	};
+    	
+    	/**
+    	 * Introduce en el DOM los datos del residente actual basandose en el residente pasado por parametro
+    	 * 
+    	 * @param {Object} oResidente El residente que sera considerado el actual
+    	 */
+    	_seleccionarResidenteActual = function (oResidente) {
+    		var oNombreYApellidos = doc.getElementById("nombreYApellidosResidenteActual"),
+				oImagenResidente = doc.getElementById("imagenResidenteActual");
+
+    		oNombreYApellidos.innerText = oResidente.nombreYApellido;
+			oImagenResidente.src = oResidente.pathImg;
+			oImagenResidente.alt = oResidente.nombreYApellido;
+			oImagenResidente.title = oResidente.nombreYApellido;
+			_nIdResidenteActual = oResidente.id;
+    	}
+    	
+    	/**
+    	 * Obtener residentes del server
+    	 */
+    	_obtenerResidentes = function () {
+    		utils.ajax("/cuidadores/consultaResidentes/" + _nIdCuidador, {
+    			success : function (oData) { 
+    				_putResidentes(oData, true); 
+    			},
+    			error : function (oData) {
+    				alert("Se ha producido un error");
+    				console.dir(oData);
+    			}
+    		});
+    	};
+    	
+    	/**
+    	 * Obtener la id del residente actual
+    	 * 
+    	 * @return {Number} Id del residente actual
+    	 */
+    	_idResidenteActual = function () {
+    		return _nIdResidenteActual;
+    	}
     	
     	_init = function () {
-    		
+    		_initDOMVars();
+    		_initEvents();
+    		_obtenerResidentes();
     	};
     	return {
-    		init : _init
+    		init : _init,
+    		idResidenteActual : _idResidenteActual
     	};
     }());
 }(window, document, procuidado.modulos, procuidado.utils));
