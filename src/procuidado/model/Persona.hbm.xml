@@ -17,6 +17,9 @@
         <property name="documentoId" type="string">
             <column name="documentoId" length="100" />
         </property>
+        <property name="nombreUsuario" type="string">
+        	<column name="nombreUsuario" length="100" not-null="true" unique="true" />
+        </property>
         <property name="password" type="string">
             <column name="password" />
         </property>
