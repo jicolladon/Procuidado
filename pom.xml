@@ -52,16 +52,7 @@
 		<artifactId>slf4j-api</artifactId>
 		<version>1.5.11</version>
 	</dependency>
-	<dependency>
-		<groupId>dom4j</groupId>
-		<artifactId>dom4j</artifactId>
-		<exclusions>
-			<exclusion>
-				<groupId>xml-apis</groupId>
-				<artifactId>xml-apis</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
+	
 	<dependency>
 		<groupId>commons-logging</groupId>
 		<artifactId>commons-logging</artifactId>
