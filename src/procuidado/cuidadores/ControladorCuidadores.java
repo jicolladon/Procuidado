@@ -65,31 +65,38 @@ public class ControladorCuidadores {
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		
 		Cuidador p = new Cuidador();
-		String id = (String) hashMapDatosCuidador.get("identificador");
+		String id = (String) hashMapDatosCuidador.get("identificadorCuidador");
 		p.setDocumentoId(id);
-		String nombre = (String) hashMapDatosCuidador.get("nombre");
+		String nombre = (String) hashMapDatosCuidador.get("nombreCuidador");
 		p.setNombre(nombre);
-		String apellido = (String) hashMapDatosCuidador.get("apellido");
+		String apellido = (String) hashMapDatosCuidador.get("apellidosCuidador");
 		p.setCognom(apellido);
-		String tipoDocumento = (String) hashMapDatosCuidador.get("tipoDocumento");
+		String tipoDocumento = (String) hashMapDatosCuidador.get("tipoDocumentoCuidador");
 		p.setTipoDeDocumento(tipoDocumento);
-		String documento = (String) hashMapDatosCuidador.get("documento");
+		String documento = (String) hashMapDatosCuidador.get("numeroDocumentoCuidador");
 		p.setDocumento(documento);
-		String telefono = (String) hashMapDatosCuidador.get("telefono");
+		String telefono = (String) hashMapDatosCuidador.get("numeroTelefonoCuidador");
 		p.setTelefono1(telefono);
 		boolean esCuidadorPorDefecto = (Boolean) (
 				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
 				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
 		session.save(p);
-		
 		iden = p.getIdentificador();
+		List<Map<String, Object>> restriccionesCuidador = (List<Map<String, Object>>) hashMapDatosCuidador.get("restriccionesCuidador");
 		Set<RestriccionHoraria> r = new HashSet<RestriccionHoraria>();
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("12", "lunes", p.getIdentificador(), "13")));
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("14", "lunes", p.getIdentificador(), "17")));
-		r.add(new RestriccionHoraria(new RestriccionHorariaId("10", "martes", p.getIdentificador(), "13")));
-		p.setRestricciones(r);
+		for (Map<String, Object> restriccionHash: restriccionesCuidador) {
+			r.add(new RestriccionHoraria (
+					new RestriccionHorariaId (
+							(String) restriccionHash.get("horaDesde"),
+							(String) restriccionHash.get("dia"),
+							iden,
+							(String) restriccionHash.get("horaHasta")
+					)
+			));
+		}
 		session.save(p);
 		session.getTransaction().commit();
 	}
