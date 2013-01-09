@@ -1,24 +1,31 @@
 package procuidado.controlInterfaces;
  
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+
 
 import procuidado.cuidadores.ControladorCuidadores;
  
 @Controller
 public class CICuidadores {
- 
-    
-    
     @RequestMapping("/cuidadores/{idCuidador}")
     public @ResponseBody Map<String, Object> getCuidador(@PathVariable(value="idCuidador") int idCuidador) {
     	Map<String, Object> res = new HashMap<String, Object>();
@@ -64,6 +71,38 @@ public class CICuidadores {
     	List<Map<String, Object> > resultado;
     	resultado = ControladorCuidadores.getInstance().obtenerResidentesCuidador(idCuidador);
     	return resultado;
+    }
+    
+    @RequestMapping(value="/cuidadores/cambiarFoto", method=RequestMethod.POST)
+    public ModelAndView cambiarFoto(HttpSession session, @ModelAttribute FormCuidador formCuidador, @RequestParam String jsCallback) throws Exception {
+    	String pathImg = (String) grabarFicheroALocal(formCuidador);
+    	ModelAndView out = new ModelAndView();
+    	session.setAttribute("pathImgCuidador", pathImg);
+    	out.addObject("pathImg", pathImg);
+    	out.addObject("jsCallback", jsCallback);
+    	return out;
+    }
+    
+    private String grabarFicheroALocal(FormCuidador form) throws Exception {
+        /*CommonsMultipartFile uploaded = form.getFotoCuidador();
+        File localFile = new File("");
+        FileOutputStream os = null;
+         
+        try {
+             
+            os = new FileOutputStream(localFile);
+            os.write(uploaded.getBytes());
+             
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }*/
+        return "/cuidadores/000001.jpg";
     }
     
     private List< Map<String, Object> > _stringARestricciones(String sRestricciones) {

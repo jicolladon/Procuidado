@@ -34,7 +34,7 @@ public class ControladorCuidadores {
 	 */
 	public Map<String, Object> obtenerCuidador(int idCuidador) {
 		Map <String, Object> cuidadorHash = new HashMap<String, Object>();
-		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(16);
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(19);
 		
 		cuidadorHash.put("id", cuidador.getIdentificador());
 		cuidadorHash.put("pathImg","/resources/imagenes/cuidadores/000001.jpg");
@@ -59,7 +59,7 @@ public class ControladorCuidadores {
 		return cuidadorHash;
 	}
 	/**
-	 * Sustituye los datos por los parametros de la funci—n siempre que se indique  
+	 * Sustituye los datos por los parametros de la funciï¿½n siempre que se indique  
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
@@ -130,7 +130,7 @@ public class ControladorCuidadores {
 		Map <String, Object> residente2 = new HashMap<String, Object>();
 		residente2.put("id", 1);
 		residente2.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente2.put("nombreYApellido","Marc Bar—");
+		residente2.put("nombreYApellido","Marc Barï¿½");
 		
 		residentes.add(residente);
 		residentes.add(residente2);
