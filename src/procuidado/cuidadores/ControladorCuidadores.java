@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import procuidado.controlDatos.FactoriaControlDatos;
 import procuidado.model.Cuidador;
 import procuidado.model.HibernateUtil;
+import procuidado.model.Residente;
 import procuidado.model.RestriccionHoraria;
 import procuidado.model.RestriccionHorariaId;
 
@@ -120,21 +121,17 @@ public class ControladorCuidadores {
 	 * @return Devuelve una lista de residentes asignados a un cuidador
 	 */
 	public List< Map<String, Object> > obtenerResidentesCuidador(int idCuidador) {
-		Map <String, Object> residente = new HashMap<String, Object>();
-		List<Map <String, Object> > residentes = new ArrayList<Map <String, Object>>();
-		residente.put("id", 1);
-		residente.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente.put("nombreYApellido","Joan isaak Collado");
-		
-		Map <String, Object> residente2 = new HashMap<String, Object>();
-		residente2.put("id", 1);
-		residente2.put("pathImg","/resources/imagenes/residentes/000001.jpg");
-		residente2.put("nombreYApellido","Marc Bar�");
-		
-		residentes.add(residente);
-		residentes.add(residente2);
-		
-		return residentes;
+		Cuidador cuidador = FactoriaControlDatos.getInstance().obtenerControladorDatosCuidadores().obtener(idCuidador);
+		Set<Residente> residentes = cuidador.getResidentes();
+		List<Map <String, Object> > residentesHash = new ArrayList<Map <String, Object>>();
+		for(Residente residente : residentes){
+			Map <String, Object> residenteHash = new HashMap<String, Object>();
+			residenteHash.put("id", residente.getIdentificador());
+			residenteHash.put("pathImg",residente.getFoto());
+			residenteHash.put("nombreYApellido",residente.getNombre() + " " + residente.getApellidos());
+			residentesHash.add(residenteHash);
+		}		
+		return residentesHash;
 	}
 	/**
 	 * Obtiene la casa asociadas al cuidador indicado 
