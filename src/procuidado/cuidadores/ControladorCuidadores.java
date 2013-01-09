@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import procuidado.controlDatos.FactoriaControlDatos;
 import procuidado.model.Cuidador;
 import procuidado.model.HibernateUtil;
-import procuidado.model.PersonaTest;
 import procuidado.model.RestriccionHoraria;
 import procuidado.model.RestriccionHorariaId;
 
