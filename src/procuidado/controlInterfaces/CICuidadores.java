@@ -8,8 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +31,9 @@ import procuidado.cuidadores.ControladorCuidadores;
  
 @Controller
 public class CICuidadores {
+	@Autowired
+	ServletContext servletContext;
+	
     @RequestMapping("/cuidadores/{idCuidador}")
     public @ResponseBody Map<String, Object> getCuidador(@PathVariable(value="idCuidador") int idCuidador) {
     	Map<String, Object> res = new HashMap<String, Object>();
@@ -79,6 +87,7 @@ public class CICuidadores {
     
     @RequestMapping(value="/cuidadores/cambiarFoto", method=RequestMethod.POST)
     public ModelAndView cambiarFoto(HttpSession session, @ModelAttribute FormCuidador formCuidador, @RequestParam String jsCallback) throws Exception {
+    	Resource yourfile = new ClassPathResource( "imagenes");
     	String pathImg = (String) grabarFicheroALocal(formCuidador);
     	ModelAndView out = new ModelAndView();
     	session.setAttribute("pathImgCuidador", pathImg);
@@ -93,8 +102,10 @@ public class CICuidadores {
     }
     
     private String grabarFicheroALocal(FormCuidador form) throws Exception {
-        /*CommonsMultipartFile uploaded = form.getFotoCuidador();
-        File localFile = new File("");
+    	
+        CommonsMultipartFile uploaded = form.getFotoCuidador();
+        String nombreImagen = String.valueOf(System.currentTimeMillis()) + String.valueOf(Math.random() * 10000) + ".jpg";
+        File localFile = new File(servletContext.getRealPath("/resources/imagenes/cuidadores") + "/" + nombreImagen);
         FileOutputStream os = null;
          
         try {
@@ -110,8 +121,8 @@ public class CICuidadores {
                     e.printStackTrace();
                 }
             }
-        }*/
-        return "/cuidadores/000001.jpg";
+        }
+        return "/resources/imagenes/cuidadores/" + nombreImagen;
     }
     
     private List< Map<String, Object> > _stringARestricciones(String sRestricciones) {

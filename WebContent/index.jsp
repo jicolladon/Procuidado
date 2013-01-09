@@ -168,11 +168,11 @@
                         <button type="button" name="nuevaRestriccionCuidador" id="nuevaRestriccionCuidador">Añadir</button>
                         <textarea name="restriccionesCuidador" id="restriccionesCuidador" readonly rows="5" class="fillinput"></textarea>
                         <label for="fotoCuidador">Foto: </label>
-                        <input type="hidden" value="/resources/imagenes/cuidadores/000001.jpg" name="pathImgCuidador" id="pathImgCuidador" />
+                        <input type="hidden" name="pathImgCuidador" id="pathImgCuidador" />
                         <p id="fotoCuidadorError" class="errorCampo off"></p>
 	                    <img src="" id="fotoCuidadorImg" width="100" height="100" />
-	                    <input type="file" name="fotoCuidador" id="fotoCuidador" class="on" />
-	                    <button formmethod="post" formenctype="multipart/form-data" formtarget="enviaFotoCuidador" formaction="/cuidadores/cambiarFoto" type="submit" name="sbmEnviaFotoCuidador" id="sbmEnviaFotoCuidador">Subir foto</button>
+	                    <input type="file" name="fotoCuidador" id="fotoCuidador" class="on" accept="image/jpeg" />
+	                    <button formmethod="post" formenctype="multipart/form-data" formtarget="enviaFotoCuidador" formaction="/cuidadores/cambiarFoto?jsCallback=procuidado.modulos.cuidadores.fotoActualizada" type="submit" name="sbmEnviaFotoCuidador" id="sbmEnviaFotoCuidador">Subir foto</button>
                         <iframe id="enviaFotoCuidador" name="enviaFotoCuidador" class="off"></iframe>
                         <label for="cuidadorPorDefecto"> ¿Es cuidador por defecto?</label>
                         <input type="checkbox" name="cuidadorPorDefecto" id="cuidadorPorDefecto" value="SI" />

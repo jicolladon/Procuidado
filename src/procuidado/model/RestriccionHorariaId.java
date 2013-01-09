@@ -71,6 +71,6 @@ public class RestriccionHorariaId implements Serializable {
 	
 	@Override
 	public int hashCode(){
-		return this.identificadorCuidador*Integer.getInteger(this.horaInici)*Integer.getInteger(this.diaSemana);
+		return this.identificadorCuidador*Integer.parseInt(this.horaInici);
 	}
 }

@@ -63,17 +63,13 @@ public class ControladorCuidadores {
 	 * @param hashMapCuidador nuevos datos del cuidador
 	 */
 	public void editarCuidador(Map<String, Object> hashMapDatosCuidador) {
-		
-		String idResidenteAsociado = (String) hashMapDatosCuidador.get("idResidente");
-		Residente residente = FactoriaControlDatos
+		Cuidador p = FactoriaControlDatos
 				.getInstance()
-				.obtenerControladorDatosResidentes()
-				.obtener(Integer.parseInt(idResidenteAsociado));
+				.obtenerControladorDatosCuidadores()
+				.obtener(Integer.parseInt((String)hashMapDatosCuidador.get("idCuidador")));
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		
-		Cuidador p = new Cuidador();
 		
 		String nombre = (String) hashMapDatosCuidador.get("nombreCuidador");
 		p.setNombre(nombre);
@@ -93,18 +89,15 @@ public class ControladorCuidadores {
 		String telefono = (String) hashMapDatosCuidador.get("numeroTelefonoCuidador");
 		p.setTelefono1(telefono);
 		
-		String username = (String) hashMapDatosCuidador.get("nombreUsuario");
-		p.setNombreUsuario(username);
 		
-		String password = (String) hashMapDatosCuidador.get("contraUsuario");
-		p.setPassword(password);
 		
 		boolean esCuidadorPorDefecto = (Boolean) (
 				((String) hashMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"
 				);
 		p.setEsCuidadorPorDefecto(esCuidadorPorDefecto);
-	
-		session.save(p);
+		p.setRestricciones(new HashSet());
+		session.update(p);
+		//session.save(p);
 		
 		iden = p.getIdentificador();
 		List<Map<String, Object>> restriccionesCuidador = (List<Map<String, Object>>) hashMapDatosCuidador.get("restriccionesCuidador");
@@ -120,7 +113,7 @@ public class ControladorCuidadores {
 			));
 		}
 		p.setRestricciones(r);
-		session.save(p);
+		session.update(p);
 		session.getTransaction().commit();
 	}
 
@@ -173,6 +166,12 @@ public class ControladorCuidadores {
 		
 		String telefono = (String) hasMapDatosCuidador.get("numeroTelefonoCuidador");
 		p.setTelefono1(telefono);
+		
+		String username = (String) hasMapDatosCuidador.get("nombreUsuario");
+		p.setNombreUsuario(username);
+		
+		String password = (String) hasMapDatosCuidador.get("contraUsuario");
+		p.setPassword(password);
 		
 		boolean esCuidadorPorDefecto = (Boolean) (
 				((String) hasMapDatosCuidador.get("cuidadorPorDefecto")) == "SI"

@@ -87,12 +87,13 @@ procuidado.modulos = procuidado.modulos || {};
             _oBtnNuevaRestriccion, _switchCuidadores,
             _oBtnEnviar, _oModal, _oVerCondiciones,
             _oMenuItem, _oView, _nIdResidente=1, _putCuidadores,
-            _oCuidadoresActuales, _sCondiciones = "Condiciones bla bla bla",
+            _oCuidadoresActuales, 
+            _sCondiciones = "Condiciones bla bla bla",
             _accionCuidadorActual, _mostrarEditarCuidador, _oDatosCuidador,
             _oTituloDatosCuidador, _oFormCuidador, _oFotoCuidador,
             _oConfirmarDatosCuidador, _confirmarDatosCuidador,
             _refrescarCuidadores, _quitarErroresFormulario,
-            _putRestricciones;
+            _putRestricciones, _fotoActualizada;
         
         /**
          * Añade una nueva restricción al textarea de restricciones
@@ -129,6 +130,7 @@ procuidado.modulos = procuidado.modulos || {};
          * Pide los cuidadores al servidor y los actualiza
          */
         _refrescarCuidadores = function () {
+        	mod.principal.ocultar(_oDatosCuidador);
         	utils.ajax("/residentes/consultaCuidadores/" + mod.residentes.idResidenteActual(), {
         		success : _putCuidadores,
         		error : function (oData) {
@@ -277,10 +279,10 @@ procuidado.modulos = procuidado.modulos || {};
          * Salva los datos del formulario
          */
         _confirmarDatosCuidador = function () {
-        	var sUrl;
+        	var sUrl, oValidacion;
         	_quitarErroresFormulario();
         	//validamos el formulario
-        	if (utils.dom.validateForm(_oFormCuidador, {
+        	oValidacion = {
         		"nombreUsuario" : {
         			type : "string",
         			empty : false,
@@ -362,12 +364,17 @@ procuidado.modulos = procuidado.modulos || {};
         				mod.principal.mostrar(oElemento);
         			}
         		}
-        	}).valid) {
-	        	if (_oFormCuidador.idCuidador === _und_ && _oFormCuidador.idCuidador.value !== "") {
-	        		sUrl = "/cuidadores/editar"
+        	};
+	        	if (_oFormCuidador.idCuidador !== _und_ && _oFormCuidador.idCuidador.value !== "") {
+	        		sUrl = "/cuidadores/editar";
+	        		delete oValidacion.nombreUsuario;
+	        		delete oValidacion.contraUsuario;
 	        	} else {
-	        		sUrl = "/cuidadores/nuevo"
+	        		sUrl = "/cuidadores/nuevo";
+	        		
 	        	}
+	        	
+	        	if (utils.dom.validateForm(_oFormCuidador, oValidacion).valid) {
 	        	utils.ajax(sUrl, {
 	    			type: "POST",
 	    			success : function (oData) {
@@ -429,10 +436,15 @@ procuidado.modulos = procuidado.modulos || {};
             _initEvents();
         };
         
-        
+        _fotoActualizada = function (sPathImg) {
+        	mod.principal.mostrar(_oFotoCuidador);
+        	_oFotoCuidador.src = sPathImg;
+        	_oFormCuidador.pathImgCuidador.value = sPathImg;
+        };
         
         return {
-            init : _init
+            init : _init,
+            fotoActualizada : _fotoActualizada
         };
     }());
 
